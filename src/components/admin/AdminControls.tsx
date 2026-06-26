@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/hooks/use-auth";
+
 import { toast } from "sonner";
 import type { Product, Livestock, RealEstate } from "@/lib/types";
 import { ProductForm, LivestockForm, RealEstateForm, DeleteConfirm } from "./Forms";
@@ -16,7 +16,6 @@ const META: Record<Kind, { table: "products" | "livestock" | "real_estate"; quer
 };
 
 export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
-  const { isAdmin } = useAuth();
   const [open, setOpen] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
@@ -32,7 +31,6 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
     onError: (e) => toast.error((e as Error).message),
   });
 
-  if (!isAdmin) return null;
   return (
     <>
       <button onClick={() => setOpen(true)}
@@ -47,7 +45,6 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
 }
 
 export function AdminRowControls({ kind, item }: { kind: Kind; item: Product | Livestock | RealEstate }) {
-  const { isAdmin } = useAuth();
   const [editing, setEditing] = useState(false);
   const [del, setDel] = useState(false);
   const qc = useQueryClient();
@@ -70,7 +67,6 @@ export function AdminRowControls({ kind, item }: { kind: Kind; item: Product | L
     onError: (e) => toast.error((e as Error).message),
   });
 
-  if (!isAdmin) return null;
   return (
     <>
       <div className="flex gap-2 px-4 pb-4 -mt-2">
