@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { RealEstateCard } from "@/components/RealEstateCard";
 import { Loader } from "@/components/Loader";
 import type { RealEstate } from "@/lib/types";
+import { AddButton } from "@/components/admin/AdminControls";
 
 export const Route = createFileRoute("/farm-land")({
   head: () => ({
@@ -61,6 +62,7 @@ function FarmLandPage() {
           <option value={50000000}>Under ₹5 Cr</option>
           <option value={100000000}>Under ₹10 Cr</option>
         </select>
+        <AddButton kind="real_estate" label="+ Add Property" />
       </div>
 
       {isLoading ? <Loader /> : filtered.length === 0 ? (

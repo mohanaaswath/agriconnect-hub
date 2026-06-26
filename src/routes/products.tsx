@@ -7,6 +7,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { Loader } from "@/components/Loader";
 import { PRODUCT_CATEGORIES } from "@/lib/constants";
 import type { Product } from "@/lib/types";
+import { AddButton } from "@/components/admin/AdminControls";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
@@ -70,6 +71,7 @@ function ProductsPage() {
             </button>
           ))}
         </div>
+        <AddButton kind="product" label="+ Add Product" />
       </div>
 
       {isLoading ? <Loader /> : error ? (
