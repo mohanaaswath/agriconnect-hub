@@ -145,28 +145,6 @@ function CrudShell<T extends { id: string }>({
   );
 }
 
-function DeleteConfirm({ open, onClose, onConfirm, name }: { open: boolean; onClose: () => void; onConfirm: () => void; name: string }) {
-  return (
-    <Modal open={open} onClose={onClose} title="Delete this item?">
-      <p className="text-sm text-muted-foreground">This will permanently remove <span className="text-foreground font-medium">{name}</span>.</p>
-      <div className="mt-6 flex gap-2 justify-end">
-        <button onClick={onClose} className="px-4 py-2 rounded-md border border-border text-sm">Cancel</button>
-        <button onClick={() => { onConfirm(); onClose(); }} className="px-4 py-2 rounded-md bg-destructive text-destructive-foreground text-sm">Delete</button>
-      </div>
-    </Modal>
-  );
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label className="block">
-      <span className="text-xs uppercase tracking-wider text-muted-foreground">{label}</span>
-      <div className="mt-1">{children}</div>
-    </label>
-  );
-}
-
-const input = "w-full px-3 py-2 bg-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary";
 
 // ============== PRODUCTS ==============
 function ProductsAdmin() {
