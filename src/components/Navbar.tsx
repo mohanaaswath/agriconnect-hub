@@ -5,7 +5,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/stores/cart";
 import { useAuth } from "@/hooks/use-auth";
-import { BUSINESS } from "@/lib/constants";
 import { waLink } from "@/lib/whatsapp";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -40,8 +39,7 @@ export function Navbar() {
             className="w-9 h-9 rounded-lg object-cover shadow-glow"
           />
           <div className="leading-tight">
-            <div className="font-display font-bold text-base">{BUSINESS.name}</div>
-            <div className="text-[10px] uppercase tracking-widest text-gold">Farm Marketplace</div>
+            <div className="font-display font-bold text-base">DhandapaniFarmerMarketplace</div>
           </div>
         </Link>
 
