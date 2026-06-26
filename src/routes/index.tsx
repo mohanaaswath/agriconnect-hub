@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Hero } from "@/components/Hero";
+import { GateOpening } from "@/components/GateOpening";
 import { About } from "@/components/About";
 import { Statistics } from "@/components/Statistics";
 import { Testimonials } from "@/components/Testimonials";
