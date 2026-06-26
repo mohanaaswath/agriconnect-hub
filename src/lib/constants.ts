@@ -7,7 +7,7 @@ export const BUSINESS = {
   phoneDisplay: "+91 91766 77275",
   email: "supreetsupreet443@gmail.com",
   address: "Dhandapani Thootam Amman Oil Mill Opposite, Kangayam Taluk, Tirupur DT, Muthur – 638105",
-  mapUrl: "https://maps.google.com/maps?q=Dhandapani+Thootam+Amman+Oil+Mill,+Muthur,+Tirupur&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  mapUrl: "https://maps.google.com/maps?q=2PMW+QF%20Dhandapani%20Thootam,Muthur,Tamil%20Nadu%20638105&output=embed",
   established: "1985",
 };
 
