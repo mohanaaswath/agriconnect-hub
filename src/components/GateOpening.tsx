@@ -10,11 +10,15 @@ export function GateOpening() {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const openTimer = setTimeout(() => setOpen(true), 1500);
-    const buttonTimer = setTimeout(() => setShowButton(true), 3100);
+    const buttonTimer = setTimeout(() => setShowButton(true), 2000);
+    const autoEnterTimer = setTimeout(() => {
+      enterSiteRef.current?.();
+    }, 2500);
 
     return () => {
       clearTimeout(openTimer);
       clearTimeout(buttonTimer);
+      clearTimeout(autoEnterTimer);
       document.body.style.overflow = "";
     };
   }, []);
@@ -28,6 +32,8 @@ export function GateOpening() {
       setEntered(true);
     }, 1000);
   };
+  const enterSiteRef = useRef(enterSite);
+  enterSiteRef.current = enterSite;
 
   return (
     <div className={`gate-scene ${exiting ? "gate-scene-exit" : ""}`} aria-hidden="false">
