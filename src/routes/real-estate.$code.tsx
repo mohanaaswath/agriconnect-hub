@@ -6,7 +6,7 @@ import type { RealEstate } from "@/lib/types";
 import { Loader } from "@/components/Loader";
 import { propertyInquiry } from "@/lib/whatsapp";
 
-export const Route = createFileRoute("/farm-land/$code")({
+export const Route = createFileRoute("/real-estate/$code")({
   component: FarmLandDetail,
 });
 
@@ -23,7 +23,7 @@ function FarmLandDetail() {
   if (isLoading) return <Loader />;
   if (!data) return (
     <div className="text-center py-32"><p className="text-muted-foreground">Property not found.</p>
-      <Link to="/farm-land" className="mt-4 inline-block text-gold">← All properties</Link></div>
+      <Link to="/real-estate" className="mt-4 inline-block text-gold">← All properties</Link></div>
   );
 
   return (
