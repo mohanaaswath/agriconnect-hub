@@ -19,11 +19,11 @@ export function GateOpening() {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const openTimer = setTimeout(() => setOpen(true), 1500);
-    const buttonTimer = setTimeout(() => setShowButton(true), 2000);
+    const openTimer = setTimeout(() => setOpen(true), 500);
+    const buttonTimer = setTimeout(() => setShowButton(true), 700);
     const autoEnterTimer = setTimeout(() => {
       enterSiteRef.current?.();
-    }, 2500);
+    }, 1000);
 
     return () => {
       clearTimeout(openTimer);
