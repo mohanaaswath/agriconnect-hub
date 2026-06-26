@@ -9,38 +9,178 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProductsRouteImport } from './routes/products'
+import { Route as LivestockRouteImport } from './routes/livestock'
+import { Route as FarmLandRouteImport } from './routes/farm-land'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsCodeRouteImport } from './routes/products.$code'
+import { Route as LivestockCodeRouteImport } from './routes/livestock.$code'
+import { Route as FarmLandCodeRouteImport } from './routes/farm-land.$code'
 
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LivestockRoute = LivestockRouteImport.update({
+  id: '/livestock',
+  path: '/livestock',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmLandRoute = FarmLandRouteImport.update({
+  id: '/farm-land',
+  path: '/farm-land',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsCodeRoute = ProductsCodeRouteImport.update({
+  id: '/$code',
+  path: '/$code',
+  getParentRoute: () => ProductsRoute,
+} as any)
+const LivestockCodeRoute = LivestockCodeRouteImport.update({
+  id: '/$code',
+  path: '/$code',
+  getParentRoute: () => LivestockRoute,
+} as any)
+const FarmLandCodeRoute = FarmLandCodeRouteImport.update({
+  id: '/$code',
+  path: '/$code',
+  getParentRoute: () => FarmLandRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/farm-land': typeof FarmLandRouteWithChildren
+  '/livestock': typeof LivestockRouteWithChildren
+  '/products': typeof ProductsRouteWithChildren
+  '/farm-land/$code': typeof FarmLandCodeRoute
+  '/livestock/$code': typeof LivestockCodeRoute
+  '/products/$code': typeof ProductsCodeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/farm-land': typeof FarmLandRouteWithChildren
+  '/livestock': typeof LivestockRouteWithChildren
+  '/products': typeof ProductsRouteWithChildren
+  '/farm-land/$code': typeof FarmLandCodeRoute
+  '/livestock/$code': typeof LivestockCodeRoute
+  '/products/$code': typeof ProductsCodeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
+  '/farm-land': typeof FarmLandRouteWithChildren
+  '/livestock': typeof LivestockRouteWithChildren
+  '/products': typeof ProductsRouteWithChildren
+  '/farm-land/$code': typeof FarmLandCodeRoute
+  '/livestock/$code': typeof LivestockCodeRoute
+  '/products/$code': typeof ProductsCodeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/farm-land'
+    | '/livestock'
+    | '/products'
+    | '/farm-land/$code'
+    | '/livestock/$code'
+    | '/products/$code'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/farm-land'
+    | '/livestock'
+    | '/products'
+    | '/farm-land/$code'
+    | '/livestock/$code'
+    | '/products/$code'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/contact'
+    | '/farm-land'
+    | '/livestock'
+    | '/products'
+    | '/farm-land/$code'
+    | '/livestock/$code'
+    | '/products/$code'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
+  FarmLandRoute: typeof FarmLandRouteWithChildren
+  LivestockRoute: typeof LivestockRouteWithChildren
+  ProductsRoute: typeof ProductsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/livestock': {
+      id: '/livestock'
+      path: '/livestock'
+      fullPath: '/livestock'
+      preLoaderRoute: typeof LivestockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farm-land': {
+      id: '/farm-land'
+      path: '/farm-land'
+      fullPath: '/farm-land'
+      preLoaderRoute: typeof FarmLandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +188,73 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/$code': {
+      id: '/products/$code'
+      path: '/$code'
+      fullPath: '/products/$code'
+      preLoaderRoute: typeof ProductsCodeRouteImport
+      parentRoute: typeof ProductsRoute
+    }
+    '/livestock/$code': {
+      id: '/livestock/$code'
+      path: '/$code'
+      fullPath: '/livestock/$code'
+      preLoaderRoute: typeof LivestockCodeRouteImport
+      parentRoute: typeof LivestockRoute
+    }
+    '/farm-land/$code': {
+      id: '/farm-land/$code'
+      path: '/$code'
+      fullPath: '/farm-land/$code'
+      preLoaderRoute: typeof FarmLandCodeRouteImport
+      parentRoute: typeof FarmLandRoute
+    }
   }
 }
 
+interface FarmLandRouteChildren {
+  FarmLandCodeRoute: typeof FarmLandCodeRoute
+}
+
+const FarmLandRouteChildren: FarmLandRouteChildren = {
+  FarmLandCodeRoute: FarmLandCodeRoute,
+}
+
+const FarmLandRouteWithChildren = FarmLandRoute._addFileChildren(
+  FarmLandRouteChildren,
+)
+
+interface LivestockRouteChildren {
+  LivestockCodeRoute: typeof LivestockCodeRoute
+}
+
+const LivestockRouteChildren: LivestockRouteChildren = {
+  LivestockCodeRoute: LivestockCodeRoute,
+}
+
+const LivestockRouteWithChildren = LivestockRoute._addFileChildren(
+  LivestockRouteChildren,
+)
+
+interface ProductsRouteChildren {
+  ProductsCodeRoute: typeof ProductsCodeRoute
+}
+
+const ProductsRouteChildren: ProductsRouteChildren = {
+  ProductsCodeRoute: ProductsCodeRoute,
+}
+
+const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
+  ProductsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
+  FarmLandRoute: FarmLandRouteWithChildren,
+  LivestockRoute: LivestockRouteWithChildren,
+  ProductsRoute: ProductsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
