@@ -31,7 +31,6 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
     onError: (e) => toast.error((e as Error).message),
   });
 
-  if (!isAdmin) return null;
   return (
     <>
       <button onClick={() => setOpen(true)}
