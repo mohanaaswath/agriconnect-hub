@@ -5,6 +5,7 @@ import type { Product } from "@/lib/types";
 import { discountedPrice } from "@/lib/types";
 import { useCart } from "@/stores/cart";
 import { toast } from "sonner";
+import { AdminRowControls } from "@/components/admin/AdminControls";
 
 export function ProductCard({ product }: { product: Product }) {
   const add = useCart((s) => s.add);
@@ -82,6 +83,7 @@ export function ProductCard({ product }: { product: Product }) {
           </button>
         </div>
       </div>
+      <AdminRowControls kind="product" item={product} />
     </motion.div>
   );
 }

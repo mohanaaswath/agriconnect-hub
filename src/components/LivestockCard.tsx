@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { CheckCircle2, MapPin, Phone } from "lucide-react";
 import type { Livestock } from "@/lib/types";
 import { livestockInquiry } from "@/lib/whatsapp";
+import { AdminRowControls } from "@/components/admin/AdminControls";
 
 export function LivestockCard({ item }: { item: Livestock }) {
   return (
@@ -51,6 +52,7 @@ export function LivestockCard({ item }: { item: Livestock }) {
           </a>
         </div>
       </div>
+      <AdminRowControls kind="livestock" item={item} />
     </motion.div>
   );
 }

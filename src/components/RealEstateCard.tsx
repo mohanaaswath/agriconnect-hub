@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { BadgeCheck, Droplets, MapPin, Maximize, Phone } from "lucide-react";
 import type { RealEstate } from "@/lib/types";
 import { propertyInquiry } from "@/lib/whatsapp";
+import { AdminRowControls } from "@/components/admin/AdminControls";
 
 export function RealEstateCard({ item }: { item: RealEstate }) {
   return (
@@ -60,6 +61,7 @@ export function RealEstateCard({ item }: { item: RealEstate }) {
           </a>
         </div>
       </div>
+      <AdminRowControls kind="real_estate" item={item} />
     </motion.div>
   );
 }
