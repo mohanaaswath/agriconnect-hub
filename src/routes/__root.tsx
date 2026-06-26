@@ -76,13 +76,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Premium agriculture marketplace for fresh farm produce, native livestock and fertile farm land in Tamil Nadu.",
+          "Premium agriculture marketplace for fresh farm produce, native livestock and verified real estate in Tamil Nadu.",
       },
       { name: "author", content: "Dhandapani Farms" },
       { property: "og:title", content: "Dhandapani Farms — Premium Agriculture Marketplace" },
       {
         property: "og:description",
-        content: "Fresh produce, native livestock and farm land — direct from the farmer.",
+        content: "Fresh produce, native livestock and real estate — direct from the farmer.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

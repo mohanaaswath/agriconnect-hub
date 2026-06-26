@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Dhandapani Farms — Premium Agriculture Marketplace" },
-      { name: "description", content: "Shop fresh produce, native livestock and fertile farm land from Tamil Nadu's trusted family-run farm." },
+      { name: "description", content: "Shop fresh produce, native livestock and verified real estate from Tamil Nadu's trusted family-run farm." },
     ],
   }),
   component: HomePage,
@@ -72,7 +72,7 @@ function HomePage() {
         )}
       </Section>
 
-      <Section title="Featured farm land" eyebrow="Verified properties" link="/farm-land">
+      <Section title="Featured real estate" eyebrow="Verified properties" link="/real-estate">
         {realEstate.isLoading ? <Loader /> : (
           <div className="grid md:grid-cols-2 gap-5">
             {realEstate.data?.map((r) => <RealEstateCard key={r.id} item={r} />)}

@@ -8,17 +8,17 @@ import { Loader } from "@/components/Loader";
 import type { RealEstate } from "@/lib/types";
 import { AddButton } from "@/components/admin/AdminControls";
 
-export const Route = createFileRoute("/farm-land")({
+export const Route = createFileRoute("/real-estate")({
   head: () => ({
     meta: [
-      { title: "Farm Land — Dhandapani Farms" },
+      { title: "Real Estate — Dhandapani Farms" },
       { name: "description", content: "Verified agricultural land and farm estates for sale across Tamil Nadu." },
     ],
   }),
-  component: FarmLandPage,
+  component: RealEstatePage,
 });
 
-function FarmLandPage() {
+function RealEstatePage() {
   const [q, setQ] = useState("");
   const [max, setMax] = useState(0);
 
@@ -45,7 +45,7 @@ function FarmLandPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <div className="text-center mb-10">
         <div className="text-xs uppercase tracking-widest text-gold">Real Estate</div>
-        <h1 className="mt-2 font-display text-4xl sm:text-5xl font-bold">Farm land & estates</h1>
+        <h1 className="mt-2 font-display text-4xl sm:text-5xl font-bold">Real estate & estates</h1>
         <p className="mt-3 text-muted-foreground max-w-xl mx-auto">Verified agricultural properties, ready for the next chapter.</p>
       </div>
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
