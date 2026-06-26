@@ -45,7 +45,6 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
 }
 
 export function AdminRowControls({ kind, item }: { kind: Kind; item: Product | Livestock | RealEstate }) {
-  const { isAdmin } = useAuth();
   const [editing, setEditing] = useState(false);
   const [del, setDel] = useState(false);
   const qc = useQueryClient();
