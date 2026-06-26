@@ -1,3 +1,4 @@
+import logoAsset from "@/assets/logo.png.asset.json";
 import { Link } from "@tanstack/react-router";
 import { Menu, ShoppingCart, X, LogOut, ShieldCheck } from "lucide-react";
 import { useState } from "react";
@@ -8,6 +9,7 @@ import { BUSINESS } from "@/lib/constants";
 import { waLink } from "@/lib/whatsapp";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -32,9 +34,11 @@ export function Navbar() {
     <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/70 border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-[oklch(0.45_0.16_150)] flex items-center justify-center shadow-glow">
-            <span className="text-primary-foreground font-bold font-display">D</span>
-          </div>
+          <img
+            src={logoAsset.url}
+            alt="Dhandapani Farms logo"
+            className="w-9 h-9 rounded-lg object-cover shadow-glow"
+          />
           <div className="leading-tight">
             <div className="font-display font-bold text-base">{BUSINESS.name}</div>
             <div className="text-[10px] uppercase tracking-widest text-gold">Farm Marketplace</div>
