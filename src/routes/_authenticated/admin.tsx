@@ -1,12 +1,11 @@
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Plus, Trash2, ShoppingBag, Beef, Trees, ClipboardList, MessageSquare, LayoutDashboard } from "lucide-react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader } from "@/components/Loader";
-import { Modal } from "@/components/admin/Modal";
-import { ImageUploader } from "@/components/admin/ImageUploader";
+import { ProductForm, LivestockForm, RealEstateForm, DeleteConfirm } from "@/components/admin/Forms";
 import { toast } from "sonner";
 import type { Product, Livestock, RealEstate } from "@/lib/types";
 
