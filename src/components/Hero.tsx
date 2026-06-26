@@ -19,32 +19,34 @@ export function Hero() {
         }}
       />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-32 md:pt-32 md:pb-40 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs uppercase tracking-widest text-gold"
-        >
-          <Sprout className="w-3.5 h-3.5" /> Farmer-direct since 1985
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mt-6 font-display text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.05] max-w-4xl mx-auto"
+          className="mt-6 font-display text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.05] max-w-4xl mx-auto tracking-wide"
         >
-          Premium produce, <span className="gold-text">native livestock</span>,<br className="hidden sm:inline" /> and fertile <span className="green-text">farm land</span>.
+          DHANDAPANI FARMER
         </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mt-4 inline-flex items-center gap-2 text-sm sm:text-base text-muted-foreground"
+        >
+          <span className="text-gold">📍</span>
+          Dhandapani Thootam, Muthur, Tamil Nadu
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto"
         >
-          Dhandapani Farms is a Tamil Nadu agriculture marketplace bringing four decades of
-          farming heritage straight to your home, your barn, and your investment portfolio.
+          Connect with trusted farmers for premium agricultural products, quality livestock,
+          and fertile Real estate. Experience the authentic taste of nature with our verified
+          agricultural marketplace.
         </motion.p>
 
         <motion.div
