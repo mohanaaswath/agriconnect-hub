@@ -7,6 +7,7 @@ import { LivestockCard } from "@/components/LivestockCard";
 import { Loader } from "@/components/Loader";
 import { LIVESTOCK_CATEGORIES } from "@/lib/constants";
 import type { Livestock } from "@/lib/types";
+import { AddButton } from "@/components/admin/AdminControls";
 
 export const Route = createFileRoute("/livestock")({
   head: () => ({
@@ -70,6 +71,7 @@ function LivestockPage() {
             </button>
           ))}
         </div>
+        <AddButton kind="livestock" label="+ Add Livestock" />
       </div>
 
       {isLoading ? <Loader /> : filtered.length === 0 ? (
