@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Leaf, ShieldCheck } from "lucide-react";
+import { ArrowRight, Leaf, ShieldCheck, Sprout } from "lucide-react";
 
 export function Hero() {
   return (
