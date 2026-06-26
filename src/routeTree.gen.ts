@@ -14,10 +14,12 @@ import { Route as LivestockRouteImport } from './routes/livestock'
 import { Route as FarmLandRouteImport } from './routes/farm-land'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsCodeRouteImport } from './routes/products.$code'
 import { Route as LivestockCodeRouteImport } from './routes/livestock.$code'
 import { Route as FarmLandCodeRouteImport } from './routes/farm-land.$code'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
@@ -44,6 +46,10 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -64,6 +70,11 @@ const FarmLandCodeRoute = FarmLandCodeRouteImport.update({
   path: '/$code',
   getParentRoute: () => FarmLandRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/farm-land': typeof FarmLandRouteWithChildren
   '/livestock': typeof LivestockRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRoute
   '/farm-land/$code': typeof FarmLandCodeRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
@@ -83,6 +95,7 @@ export interface FileRoutesByTo {
   '/farm-land': typeof FarmLandRouteWithChildren
   '/livestock': typeof LivestockRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRoute
   '/farm-land/$code': typeof FarmLandCodeRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
@@ -90,11 +103,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/farm-land': typeof FarmLandRouteWithChildren
   '/livestock': typeof LivestockRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/farm-land/$code': typeof FarmLandCodeRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
@@ -108,6 +123,7 @@ export interface FileRouteTypes {
     | '/farm-land'
     | '/livestock'
     | '/products'
+    | '/admin'
     | '/farm-land/$code'
     | '/livestock/$code'
     | '/products/$code'
@@ -119,17 +135,20 @@ export interface FileRouteTypes {
     | '/farm-land'
     | '/livestock'
     | '/products'
+    | '/admin'
     | '/farm-land/$code'
     | '/livestock/$code'
     | '/products/$code'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/auth'
     | '/contact'
     | '/farm-land'
     | '/livestock'
     | '/products'
+    | '/_authenticated/admin'
     | '/farm-land/$code'
     | '/livestock/$code'
     | '/products/$code'
@@ -137,6 +156,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   FarmLandRoute: typeof FarmLandRouteWithChildren
@@ -181,6 +201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -209,8 +236,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FarmLandCodeRouteImport
       parentRoute: typeof FarmLandRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface FarmLandRouteChildren {
   FarmLandCodeRoute: typeof FarmLandCodeRoute
@@ -250,6 +295,7 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   FarmLandRoute: FarmLandRouteWithChildren,
