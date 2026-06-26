@@ -9,7 +9,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Dhandapani Farms" },
-      { name: "description", content: "Get in touch with Dhandapani Farms for produce, livestock or farm land inquiries." },
+      { name: "description", content: "Get in touch with Dhandapani Farms for produce, livestock or real estate inquiries." },
     ],
   }),
   component: ContactPage,
