@@ -51,6 +51,7 @@ function HomePage() {
 
   return (
     <>
+      <GateOpening />
       <Hero />
       <About />
       <Statistics />
