@@ -1,0 +1,89 @@
+import { useEffect, useState, useRef } from "react";
+
+const ENTERED_KEY = "dhandapani-entered";
+
+export function GateOpening() {
+  const [entered, setEntered] = useState(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return localStorage.getItem(ENTERED_KEY) === "true";
+    } catch {
+      return false;
+    }
+  });
+  const [open, setOpen] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+  const [exiting, setExiting] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (entered) return;
+    document.body.style.overflow = "hidden";
+
+    const openTimer = setTimeout(() => setOpen(true), 1500);
+    const buttonTimer = setTimeout(() => setShowButton(true), 3100);
+
+    return () => {
+      clearTimeout(openTimer);
+      clearTimeout(buttonTimer);
+      document.body.style.overflow = "";
+    };
+  }, [entered]);
+
+  if (entered) return null;
+
+  const enterSite = () => {
+    setExiting(true);
+    document.body.style.overflow = "auto";
+    setTimeout(() => {
+      try {
+        localStorage.setItem(ENTERED_KEY, "true");
+      } catch {
+        /* ignore */
+      }
+      setEntered(true);
+    }, 1000);
+  };
+
+  return (
+    <div className={`gate-scene ${exiting ? "gate-scene-exit" : ""}`} aria-hidden="false">
+      <div className="gate-sun" />
+      <div className="gate-birds">
+        <div className="gate-bird" />
+        <div className="gate-bird" />
+        <div className="gate-bird" />
+      </div>
+
+      <p className="gate-welcome-text">வருக வருக · Welcome</p>
+
+      <div ref={wrapperRef} className={`gate-wrapper ${open ? "gate-open" : ""}`}>
+        <div className="gate-pillar gate-pillar-left" />
+        <div className="gate-pillar gate-pillar-right" />
+
+        <div className="gate-arch">
+          <div className="gate-arch-sign">
+            <div className="gate-farm-name">DHANDAPANI</div>
+            <div className="gate-farm-sub">FARM · MUTHUR</div>
+          </div>
+        </div>
+
+        <div className="gate-door gate-door-left">
+          <div className="gate-knob gate-knob-left" />
+        </div>
+        <div className="gate-door gate-door-right">
+          <div className="gate-knob gate-knob-right" />
+        </div>
+
+        <button
+          type="button"
+          className={`gate-enter-btn ${showButton ? "gate-enter-btn-show" : ""}`}
+          onClick={enterSite}
+        >
+          🚜 உள்ளே வாருங்கள்
+        </button>
+      </div>
+
+      <div className="gate-ground" />
+    </div>
+  );
+}
