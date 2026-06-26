@@ -40,8 +40,7 @@ export function Navbar() {
             className="w-9 h-9 rounded-lg object-cover shadow-glow"
           />
           <div className="leading-tight">
-            <div className="font-display font-bold text-base">{BUSINESS.name}</div>
-            <div className="text-[10px] uppercase tracking-widest text-gold">Farm Marketplace</div>
+            <div className="font-display font-bold text-base">DhandapaniFarmerMarketplace</div>
           </div>
         </Link>
 
