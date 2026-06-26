@@ -1,0 +1,80 @@
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { BUSINESS } from "@/lib/constants";
+
+export const Route = createFileRoute("/auth")({
+  head: () => ({
+    meta: [
+      { title: "Sign in — Dhandapani Farms" },
+      { name: "description", content: "Sign in or create an account." },
+    ],
+  }),
+  component: AuthPage,
+});
+
+function AuthPage() {
+  const navigate = useNavigate();
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [f, setF] = useState({ email: "", password: "", name: "" });
+  const [loading, setLoading] = useState(false);
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (mode === "signup") {
+        const { error } = await supabase.auth.signUp({
+          email: f.email,
+          password: f.password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/`,
+            data: { full_name: f.name },
+          },
+        });
+        if (error) throw error;
+        toast.success("Account created! You're signed in.");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email: f.email, password: f.password });
+        if (error) throw error;
+        toast.success("Welcome back!");
+      }
+      navigate({ to: "/" });
+    } catch (err) {
+      toast.error((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="min-h-[70vh] flex items-center justify-center px-4 py-16">
+      <div className="w-full max-w-md glass rounded-2xl p-8">
+        <div className="text-center mb-6">
+          <div className="text-xs uppercase tracking-widest text-gold">{BUSINESS.name}</div>
+          <h1 className="mt-2 font-display text-3xl font-bold">{mode === "signin" ? "Welcome back" : "Create account"}</h1>
+        </div>
+        <form onSubmit={submit} className="space-y-3">
+          {mode === "signup" && (
+            <input placeholder="Full name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })}
+              className="w-full px-4 py-3 bg-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+          )}
+          <input type="email" placeholder="Email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })}
+            className="w-full px-4 py-3 bg-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary" required />
+          <input type="password" placeholder="Password" value={f.password} onChange={(e) => setF({ ...f, password: e.target.value })}
+            className="w-full px-4 py-3 bg-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary" required minLength={6} />
+          <button disabled={loading} className="w-full py-3 rounded-md bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow disabled:opacity-50">
+            {loading ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
+          </button>
+        </form>
+        <div className="mt-5 text-center text-sm text-muted-foreground">
+          {mode === "signin" ? "New here?" : "Already have an account?"}{" "}
+          <button onClick={() => setMode(mode === "signin" ? "signup" : "signin")} className="text-gold hover:underline">
+            {mode === "signin" ? "Create an account" : "Sign in"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
