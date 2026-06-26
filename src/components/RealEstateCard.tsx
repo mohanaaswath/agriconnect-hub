@@ -8,7 +8,7 @@ import { AdminRowControls } from "@/components/admin/AdminControls";
 export function RealEstateCard({ item }: { item: RealEstate }) {
   return (
     <motion.div whileHover={{ y: -4 }} className="glass rounded-2xl overflow-hidden flex flex-col">
-      <Link to="/farm-land/$code" params={{ code: item.property_code }} className="relative aspect-[16/9] overflow-hidden bg-secondary block">
+      <Link to="/real-estate/$code" params={{ code: item.property_code }} className="relative aspect-[16/9] overflow-hidden bg-secondary block">
         {item.images?.[0] && (
           <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" />
         )}
@@ -20,7 +20,7 @@ export function RealEstateCard({ item }: { item: RealEstate }) {
       </Link>
 
       <div className="p-5 flex-1 flex flex-col">
-        <Link to="/farm-land/$code" params={{ code: item.property_code }}>
+        <Link to="/real-estate/$code" params={{ code: item.property_code }}>
           <h3 className="font-display text-xl font-semibold hover:text-gold transition">{item.name}</h3>
         </Link>
         <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">

@@ -11,14 +11,14 @@ import { AddButton } from "@/components/admin/AdminControls";
 export const Route = createFileRoute("/real-estate")({
   head: () => ({
     meta: [
-      { title: "Farm Land — Dhandapani Farms" },
+      { title: "Real Estate — Dhandapani Farms" },
       { name: "description", content: "Verified agricultural land and farm estates for sale across Tamil Nadu." },
     ],
   }),
-  component: FarmLandPage,
+  component: RealEstatePage,
 });
 
-function FarmLandPage() {
+function RealEstatePage() {
   const [q, setQ] = useState("");
   const [max, setMax] = useState(0);
 

@@ -7,10 +7,10 @@ import { Loader } from "@/components/Loader";
 import { propertyInquiry } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/real-estate/$code")({
-  component: FarmLandDetail,
+  component: RealEstateDetail,
 });
 
-function FarmLandDetail() {
+function RealEstateDetail() {
   const { code } = Route.useParams();
   const { data, isLoading } = useQuery({
     queryKey: ["real-estate", code],
