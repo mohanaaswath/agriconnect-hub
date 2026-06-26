@@ -6,14 +6,24 @@ export function GateOpening() {
   const [showButton, setShowButton] = useState(false);
   const [exiting, setExiting] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const enterSiteRef = useRef<() => void>(() => {});
+
+  const enterSite = () => {
+    setExiting(true);
+    document.body.style.overflow = "auto";
+    setTimeout(() => {
+      setEntered(true);
+    }, 1000);
+  };
+  enterSiteRef.current = enterSite;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const openTimer = setTimeout(() => setOpen(true), 1500);
-    const buttonTimer = setTimeout(() => setShowButton(true), 2000);
+    const openTimer = setTimeout(() => setOpen(true), 500);
+    const buttonTimer = setTimeout(() => setShowButton(true), 700);
     const autoEnterTimer = setTimeout(() => {
       enterSiteRef.current?.();
-    }, 2500);
+    }, 1000);
 
     return () => {
       clearTimeout(openTimer);
@@ -24,16 +34,6 @@ export function GateOpening() {
   }, []);
 
   if (entered) return null;
-
-  const enterSite = () => {
-    setExiting(true);
-    document.body.style.overflow = "auto";
-    setTimeout(() => {
-      setEntered(true);
-    }, 1000);
-  };
-  const enterSiteRef = useRef(enterSite);
-  enterSiteRef.current = enterSite;
 
   return (
     <div className={`gate-scene ${exiting ? "gate-scene-exit" : ""}`} aria-hidden="false">
