@@ -49,7 +49,7 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
       delete payload.id;
       delete payload[m.codeField];
       delete payload.created_at;
-      const { error } = await supabase.from(m.table).insert(payload as object);
+      const { error } = await supabase.from(m.table).insert(payload as never);
       if (error) throw error;
     },
     onSuccess: () => {
