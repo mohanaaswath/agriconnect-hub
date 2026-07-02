@@ -60,7 +60,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Try again
           </button>
-          <a href="/" className="rounded-md border border-border px-4 py-2 text-sm">Home</a>
+          <Link to="/" className="rounded-md border border-border px-4 py-2 text-sm">
+            Home
+          </Link>
         </div>
       </div>
     </div>
