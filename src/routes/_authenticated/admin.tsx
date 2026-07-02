@@ -233,15 +233,15 @@ function ProductsAdmin() {
   });
   const save = useMutation({
     mutationFn: async (p: Partial<Product>) => {
-      const payload: any = { ...p };
+      const payload: Record<string, unknown> = { ...p };
       delete payload.id;
       delete payload.product_code;
       delete payload.created_at;
       if (p.id) {
-        const { error } = await supabase.from("products").update(payload).eq("id", p.id);
+        const { error } = await supabase.from("products").update(payload as never).eq("id", p.id);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("products").insert(payload);
+        const { error } = await supabase.from("products").insert(payload as never);
         if (error) throw error;
       }
     },
