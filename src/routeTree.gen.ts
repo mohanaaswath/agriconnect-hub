@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RealEstateRouteImport } from './routes/real-estate'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as LivestockRouteImport } from './routes/livestock'
@@ -21,6 +22,11 @@ import { Route as ProductsCodeRouteImport } from './routes/products.$code'
 import { Route as LivestockCodeRouteImport } from './routes/livestock.$code'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RealEstateRoute = RealEstateRouteImport.update({
   id: '/real-estate',
   path: '/real-estate',
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/livestock': typeof LivestockRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/real-estate': typeof RealEstateRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/livestock': typeof LivestockRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/real-estate': typeof RealEstateRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/livestock': typeof LivestockRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/real-estate': typeof RealEstateRouteWithChildren
+  '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
@@ -123,6 +132,7 @@ export interface FileRouteTypes {
     | '/livestock'
     | '/products'
     | '/real-estate'
+    | '/reset-password'
     | '/admin'
     | '/livestock/$code'
     | '/products/$code'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
     | '/livestock'
     | '/products'
     | '/real-estate'
+    | '/reset-password'
     | '/admin'
     | '/livestock/$code'
     | '/products/$code'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '/livestock'
     | '/products'
     | '/real-estate'
+    | '/reset-password'
     | '/_authenticated/admin'
     | '/livestock/$code'
     | '/products/$code'
@@ -162,10 +174,18 @@ export interface RootRouteChildren {
   LivestockRoute: typeof LivestockRouteWithChildren
   ProductsRoute: typeof ProductsRouteWithChildren
   RealEstateRoute: typeof RealEstateRouteWithChildren
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/real-estate': {
       id: '/real-estate'
       path: '/real-estate'
@@ -301,6 +321,7 @@ const rootRouteChildren: RootRouteChildren = {
   LivestockRoute: LivestockRouteWithChildren,
   ProductsRoute: ProductsRouteWithChildren,
   RealEstateRoute: RealEstateRouteWithChildren,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
