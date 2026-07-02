@@ -11,12 +11,14 @@ import { ProductForm, LivestockForm, RealEstateForm, DeleteConfirm } from "./For
 
 type Kind = "product" | "livestock" | "real_estate";
 
+type BaseItem = Product | Livestock | RealEstate;
+
 const META: Record<
   Kind,
   {
     table: "products" | "livestock" | "real_estate";
     queryKey: string;
-    codeField: string;
+    codeField: keyof BaseItem;
     label: string;
   }
 > = {
@@ -35,13 +37,15 @@ const META: Record<
   },
 };
 
+
 export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
   const [open, setOpen] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
 
   const save = useMutation({
-    mutationFn: async (p: any) => {
+    mutationFn: async (p: Record<string, unknown>) => {
+
       const payload = { ...p };
       delete payload.id;
       delete payload[m.codeField];
@@ -106,7 +110,7 @@ export function AdminRowControls({
   const m = META[kind];
 
   const save = useMutation({
-    mutationFn: async (p: any) => {
+    mutationFn: async (p: Record<string, unknown>) => {
       const payload = { ...p };
       delete payload.id;
       delete payload[m.codeField];
@@ -114,7 +118,8 @@ export function AdminRowControls({
       const { error } = await supabase
         .from(m.table)
         .update(payload)
-        .eq("id", (item as any).id);
+        .eq("id", item.id);
+
       if (error) throw error;
     },
     onSuccess: () => {
@@ -130,7 +135,8 @@ export function AdminRowControls({
       const { error } = await supabase
         .from(m.table)
         .delete()
-        .eq("id", (item as any).id);
+        .eq("id", item.id);
+
       if (error) throw error;
     },
     onSuccess: () => {
@@ -183,9 +189,10 @@ export function AdminRowControls({
       <DeleteConfirm
         open={del}
         onClose={() => setDel(false)}
-        name={(item as any).name}
+        name={item.name}
         onConfirm={() => remove.mutate()}
       />
+
     </>
   );
 }
