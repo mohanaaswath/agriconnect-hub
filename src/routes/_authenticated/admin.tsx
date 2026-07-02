@@ -53,7 +53,7 @@ function AdminPage() {
       </div>
     );
 
-  const tabs: { key: Tab; label: string; icon: any }[] = [
+  const tabs: { key: Tab; label: string; icon: LucideIcon }[] = [
     { key: "dashboard", label: "Overview", icon: LayoutDashboard },
     { key: "products", label: "Products", icon: ShoppingBag },
     { key: "livestock", label: "Livestock", icon: Beef },
