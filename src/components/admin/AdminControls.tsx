@@ -116,7 +116,7 @@ export function AdminRowControls({
       delete payload.created_at;
       const { error } = await supabase
         .from(m.table)
-        .update(payload)
+        .update(payload as never)
         .eq("id", item.id);
 
       if (error) throw error;
