@@ -547,7 +547,7 @@ function OrdersAdmin() {
           </tr>
         </thead>
         <tbody>
-          {data.map((o: any) => (
+          {data.map((o: Order) => (
             <tr key={o.id} className="border-b border-border/50 last:border-0">
               <td className="p-3">
                 <div className="font-medium">{o.customer_name}</div>
@@ -617,7 +617,7 @@ function MessagesAdmin() {
   if (isLoading) return <Loader />;
   return (
     <div className="space-y-3">
-      {data.map((m: any) => (
+      {data.map((m: ContactMessage) => (
         <div key={m.id} className="glass rounded-xl p-4">
           <div className="flex justify-between items-start">
             <div>
