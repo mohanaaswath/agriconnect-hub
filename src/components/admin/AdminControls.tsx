@@ -18,7 +18,7 @@ const META: Record<
   {
     table: "products" | "livestock" | "real_estate";
     queryKey: string;
-    codeField: keyof BaseItem;
+    codeField: string;
     label: string;
   }
 > = {
