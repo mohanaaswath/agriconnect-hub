@@ -9,7 +9,6 @@ import { waLink } from "@/lib/whatsapp";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/products", label: "Products" },
@@ -65,7 +64,9 @@ export function Navbar() {
             rel="noreferrer"
             className="hidden md:inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium bg-[oklch(0.55_0.18_150)] text-primary-foreground hover:opacity-90 transition"
           >
-            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current"><path d="M20.5 3.5A12 12 0 0 0 3.3 19l-1.3 4.8 5-1.3a12 12 0 0 0 13.6-19zm-8.5 18a10 10 0 0 1-5-1.3l-.4-.2-3 .8.8-2.9-.2-.4A10 10 0 1 1 22 12a10 10 0 0 1-10 9.5zm5.5-7c-.3-.2-1.8-.9-2-1s-.5-.2-.7.1-.8 1-1 1.2-.4.2-.7 0-1.3-.5-2.5-1.5a9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-1 2.2c0 1.3 1 2.6 1.1 2.7s2 3 4.8 4.2c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4s.3-1.2.2-1.3z"/></svg>
+            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
+              <path d="M20.5 3.5A12 12 0 0 0 3.3 19l-1.3 4.8 5-1.3a12 12 0 0 0 13.6-19zm-8.5 18a10 10 0 0 1-5-1.3l-.4-.2-3 .8.8-2.9-.2-.4A10 10 0 1 1 22 12a10 10 0 0 1-10 9.5zm5.5-7c-.3-.2-1.8-.9-2-1s-.5-.2-.7.1-.8 1-1 1.2-.4.2-.7 0-1.3-.5-2.5-1.5a9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-1 2.2c0 1.3 1 2.6 1.1 2.7s2 3 4.8 4.2c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4s.3-1.2.2-1.3z" />
+            </svg>
             WhatsApp
           </a>
 
@@ -92,7 +93,11 @@ export function Navbar() {
                   <ShieldCheck className="w-4 h-4" /> Admin
                 </Link>
               )}
-              <button onClick={signOut} className="p-2 rounded-md hover:bg-accent" aria-label="Sign out">
+              <button
+                onClick={signOut}
+                className="p-2 rounded-md hover:bg-accent"
+                aria-label="Sign out"
+              >
                 <LogOut className="w-5 h-5" />
               </button>
             </>
@@ -105,7 +110,11 @@ export function Navbar() {
             </Link>
           )}
 
-          <button onClick={() => setOpen(true)} className="lg:hidden p-2 rounded-md hover:bg-accent" aria-label="Menu">
+          <button
+            onClick={() => setOpen(true)}
+            className="lg:hidden p-2 rounded-md hover:bg-accent"
+            aria-label="Menu"
+          >
             <Menu className="w-5 h-5" />
           </button>
         </div>

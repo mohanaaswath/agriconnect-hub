@@ -16,7 +16,11 @@ export function ProductCard({ product }: { product: Product }) {
       whileHover={{ y: -4 }}
       className="glass rounded-2xl overflow-hidden group flex flex-col"
     >
-      <Link to="/products/$code" params={{ code: product.product_code }} className="block relative aspect-[4/3] overflow-hidden bg-secondary">
+      <Link
+        to="/products/$code"
+        params={{ code: product.product_code }}
+        className="block relative aspect-[4/3] overflow-hidden bg-secondary"
+      >
         {product.image_url && (
           <img
             src={product.image_url}
@@ -59,7 +63,9 @@ export function ProductCard({ product }: { product: Product }) {
             {product.name}
           </h3>
         </Link>
-        <p className="mt-1 text-xs text-muted-foreground line-clamp-2 flex-1">{product.description}</p>
+        <p className="mt-1 text-xs text-muted-foreground line-clamp-2 flex-1">
+          {product.description}
+        </p>
 
         <div className="mt-3 flex items-end justify-between">
           <div>

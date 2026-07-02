@@ -86,7 +86,5 @@ export interface Profile {
 }
 
 export function discountedPrice(p: Pick<Product, "price" | "discount_percent">) {
-  return p.discount_percent > 0
-    ? Math.round(p.price * (1 - p.discount_percent / 100))
-    : p.price;
+  return p.discount_percent > 0 ? Math.round(p.price * (1 - p.discount_percent / 100)) : p.price;
 }

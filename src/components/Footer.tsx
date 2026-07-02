@@ -14,26 +14,49 @@ export function Footer() {
             <span className="font-display font-bold">{BUSINESS.name}</span>
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
-            Premium farm produce, native livestock and fertile agriculture land — sourced direct from the farmer since {BUSINESS.established}.
+            Premium farm produce, native livestock and fertile agriculture land — sourced direct
+            from the farmer since {BUSINESS.established}.
           </p>
         </div>
 
         <div>
           <h4 className="font-display font-semibold text-gold mb-3">Marketplace</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/products" className="hover:text-foreground">Products</Link></li>
-            <li><Link to="/livestock" className="hover:text-foreground">Livestock</Link></li>
-            <li><Link to="/real-estate" className="hover:text-foreground">Real Estate</Link></li>
-            <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
+            <li>
+              <Link to="/products" className="hover:text-foreground">
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link to="/livestock" className="hover:text-foreground">
+                Livestock
+              </Link>
+            </li>
+            <li>
+              <Link to="/real-estate" className="hover:text-foreground">
+                Real Estate
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-foreground">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-display font-semibold text-gold mb-3">Reach Us</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-primary" /> {BUSINESS.address}</li>
-            <li className="flex items-start gap-2"><Phone className="w-4 h-4 mt-0.5 text-primary" /> {BUSINESS.phoneDisplay}</li>
-            <li className="flex items-start gap-2"><Mail className="w-4 h-4 mt-0.5 text-primary" /> {BUSINESS.email}</li>
+            <li className="flex items-start gap-2">
+              <MapPin className="w-4 h-4 mt-0.5 text-primary" /> {BUSINESS.address}
+            </li>
+            <li className="flex items-start gap-2">
+              <Phone className="w-4 h-4 mt-0.5 text-primary" /> {BUSINESS.phoneDisplay}
+            </li>
+            <li className="flex items-start gap-2">
+              <Mail className="w-4 h-4 mt-0.5 text-primary" /> {BUSINESS.email}
+            </li>
           </ul>
         </div>
 

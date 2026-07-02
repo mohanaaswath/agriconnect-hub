@@ -10,10 +10,10 @@ export function About() {
           Four decades of <span className="green-text">honest farming</span>.
         </h2>
         <p className="mt-5 text-muted-foreground leading-relaxed">
-          {BUSINESS.name} began in {BUSINESS.established} as a small family farm in Tamil
-          Nadu and grew into a trusted agriculture marketplace. We sell what we and our
-          partner farmers grow — fresh produce, healthy native livestock, and well-cared
-          agricultural land — without middlemen, without compromise.
+          {BUSINESS.name} began in {BUSINESS.established} as a small family farm in Tamil Nadu and
+          grew into a trusted agriculture marketplace. We sell what we and our partner farmers grow
+          — fresh produce, healthy native livestock, and well-cared agricultural land — without
+          middlemen, without compromise.
         </p>
         <div className="mt-8 grid sm:grid-cols-3 gap-4">
           {[

@@ -13,7 +13,11 @@ export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
       { title: "Products — Dhandapani Farms" },
-      { name: "description", content: "Fresh agriculture produce: grains, fruits, vegetables, seeds and trees direct from Tamil Nadu farms." },
+      {
+        name: "description",
+        content:
+          "Fresh agriculture produce: grains, fruits, vegetables, seeds and trees direct from Tamil Nadu farms.",
+      },
     ],
   }),
   component: ProductsPage,
@@ -26,7 +30,10 @@ function ProductsPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("products").select("*").order("created_at", { ascending: false });
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as Product[];
     },
@@ -37,7 +44,9 @@ function ProductsPage() {
     return list.filter((p) => {
       const matchCat = cat === "All" || p.category === cat;
       const term = q.trim().toLowerCase();
-      const matchQ = !term || [p.name, p.description, p.category].filter(Boolean).join(" ").toLowerCase().includes(term);
+      const matchQ =
+        !term ||
+        [p.name, p.description, p.category].filter(Boolean).join(" ").toLowerCase().includes(term);
       return matchCat && matchQ;
     });
   }, [data, q, cat]);
@@ -47,7 +56,9 @@ function ProductsPage() {
       <div className="text-center mb-10">
         <div className="text-xs uppercase tracking-widest text-gold">Marketplace</div>
         <h1 className="mt-2 font-display text-4xl sm:text-5xl font-bold">Fresh produce</h1>
-        <p className="mt-3 text-muted-foreground max-w-xl mx-auto">Browse seasonal harvests, organic staples and farm essentials.</p>
+        <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
+          Browse seasonal harvests, organic staples and farm essentials.
+        </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
@@ -74,13 +85,19 @@ function ProductsPage() {
         <AddButton kind="product" label="+ Add Product" />
       </div>
 
-      {isLoading ? <Loader /> : error ? (
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
         <div className="text-center py-20 text-destructive">Failed to load products.</div>
       ) : filtered.length === 0 ? (
-        <div className="text-center py-20 text-muted-foreground">No products match your search.</div>
+        <div className="text-center py-20 text-muted-foreground">
+          No products match your search.
+        </div>
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {filtered.map((p) => <ProductCard key={p.id} product={p} />)}
+          {filtered.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
         </div>
       )}
     </div>

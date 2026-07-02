@@ -1,6 +1,9 @@
 import { supabase } from "@/integrations/supabase/client";
 
-export async function uploadImage(bucket: "products" | "livestock" | "real-estate", file: File): Promise<string> {
+export async function uploadImage(
+  bucket: "products" | "livestock" | "real-estate",
+  file: File,
+): Promise<string> {
   const ext = file.name.split(".").pop() || "jpg";
   const path = `${crypto.randomUUID()}.${ext}`;
   const { error } = await supabase.storage.from(bucket).upload(path, file, {
