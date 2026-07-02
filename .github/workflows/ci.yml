@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  build-and-test:
+    name: Build, Lint, Typecheck & Smoke Tests
+    runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
+      SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: bun run lint
+
+      - name: TypeScript check
+        run: bunx tsc --noEmit
+
+      - name: Build
+        run: bun run build
+
+      - name: Database & RLS smoke tests
+        if: env.VITE_SUPABASE_URL != ''
+        run: bun run scripts/smoke-test.ts
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: staging-build-${{ github.sha }}
+          path: dist
+          retention-days: 14
+
+  deploy-staging:
+    name: Deploy Staging
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: staging-build-${{ github.sha }}
+          path: dist
+
+      - name: Deploy to staging
+        id: deploy
+        run: |
+          echo "Staging deploy handled automatically by Lovable on push to main."
+          echo "url=https://id-preview--0f1b6d44-f4ad-4385-985b-db4174e5a501.lovable.app" >> "$GITHUB_OUTPUT"
