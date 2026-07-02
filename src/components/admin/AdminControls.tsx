@@ -45,12 +45,11 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
 
   const save = useMutation({
     mutationFn: async (p: Record<string, unknown>) => {
-
       const payload = { ...p };
       delete payload.id;
       delete payload[m.codeField];
       delete payload.created_at;
-      const { error } = await supabase.from(m.table).insert(payload);
+      const { error } = await supabase.from(m.table).insert(payload as object);
       if (error) throw error;
     },
     onSuccess: () => {
