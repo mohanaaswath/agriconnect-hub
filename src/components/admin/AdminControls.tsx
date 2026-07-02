@@ -37,7 +37,6 @@ const META: Record<
   },
 };
 
-
 export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
   const [open, setOpen] = useState(false);
   const qc = useQueryClient();
@@ -131,10 +130,7 @@ export function AdminRowControls({
 
   const remove = useMutation({
     mutationFn: async () => {
-      const { error } = await supabase
-        .from(m.table)
-        .delete()
-        .eq("id", item.id);
+      const { error } = await supabase.from(m.table).delete().eq("id", item.id);
 
       if (error) throw error;
     },
@@ -191,7 +187,6 @@ export function AdminRowControls({
         name={item.name}
         onConfirm={() => remove.mutate()}
       />
-
     </>
   );
 }

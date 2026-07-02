@@ -238,7 +238,10 @@ function ProductsAdmin() {
       delete payload.product_code;
       delete payload.created_at;
       if (p.id) {
-        const { error } = await supabase.from("products").update(payload as never).eq("id", p.id);
+        const { error } = await supabase
+          .from("products")
+          .update(payload as never)
+          .eq("id", p.id);
         if (error) throw error;
       } else {
         const { error } = await supabase.from("products").insert(payload as never);
@@ -337,7 +340,10 @@ function LivestockAdmin() {
       delete payload.livestock_code;
       delete payload.created_at;
       if (p.id) {
-        const { error } = await supabase.from("livestock").update(payload as never).eq("id", p.id);
+        const { error } = await supabase
+          .from("livestock")
+          .update(payload as never)
+          .eq("id", p.id);
         if (error) throw error;
       } else {
         const { error } = await supabase.from("livestock").insert(payload as never);
@@ -434,7 +440,10 @@ function RealEstateAdmin() {
       delete payload.property_code;
       delete payload.created_at;
       if (p.id) {
-        const { error } = await supabase.from("real_estate").update(payload as never).eq("id", p.id);
+        const { error } = await supabase
+          .from("real_estate")
+          .update(payload as never)
+          .eq("id", p.id);
         if (error) throw error;
       } else {
         const { error } = await supabase.from("real_estate").insert(payload as never);

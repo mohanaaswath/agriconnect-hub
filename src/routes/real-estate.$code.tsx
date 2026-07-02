@@ -1,6 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { BadgeCheck, Droplets, Layers, MapPin, Maximize, Phone, type LucideIcon } from "lucide-react";
+import {
+  BadgeCheck,
+  Droplets,
+  Layers,
+  MapPin,
+  Maximize,
+  Phone,
+  type LucideIcon,
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { RealEstate } from "@/lib/types";
 import { Loader } from "@/components/Loader";
@@ -121,7 +129,15 @@ function RealEstateDetail() {
   );
 }
 
-function Stat({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string | null }) {
+function Stat({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string | null;
+}) {
   return (
     <div className="glass rounded-xl p-4">
       <Icon className="w-4 h-4 text-gold" />

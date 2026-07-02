@@ -97,4 +97,3 @@ export interface ContactMessage {
   message: string;
   created_at: string;
 }
-
