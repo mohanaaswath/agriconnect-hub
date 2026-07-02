@@ -10,6 +10,7 @@ import {
   ClipboardList,
   MessageSquare,
   LayoutDashboard,
+  type LucideIcon,
 } from "lucide-react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
