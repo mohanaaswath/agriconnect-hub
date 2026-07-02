@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send, type LucideIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { BUSINESS } from "@/lib/constants";
@@ -123,7 +123,7 @@ function ContactPage() {
   );
 }
 
-function Info({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
+function Info({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
     <div className="flex items-start gap-3">
       <div className="w-10 h-10 rounded-lg bg-primary/10 text-gold flex items-center justify-center shrink-0">
