@@ -17,7 +17,11 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Dhandapani Farms — Premium Agriculture Marketplace" },
-      { name: "description", content: "Shop fresh produce, native livestock and verified real estate from Tamil Nadu's trusted family-run farm." },
+      {
+        name: "description",
+        content:
+          "Shop fresh produce, native livestock and verified real estate from Tamil Nadu's trusted family-run farm.",
+      },
     ],
   }),
   component: HomePage,
@@ -27,7 +31,11 @@ function HomePage() {
   const products = useQuery({
     queryKey: ["featured-products"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("products").select("*").eq("featured", true).limit(6);
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .eq("featured", true)
+        .limit(6);
       if (error) throw error;
       return (data ?? []) as Product[];
     },
@@ -35,7 +43,11 @@ function HomePage() {
   const livestock = useQuery({
     queryKey: ["featured-livestock"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("livestock").select("*").eq("featured", true).limit(3);
+      const { data, error } = await supabase
+        .from("livestock")
+        .select("*")
+        .eq("featured", true)
+        .limit(3);
       if (error) throw error;
       return (data ?? []) as Livestock[];
     },
@@ -43,7 +55,11 @@ function HomePage() {
   const realEstate = useQuery({
     queryKey: ["featured-real-estate"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("real_estate").select("*").eq("featured", true).limit(2);
+      const { data, error } = await supabase
+        .from("real_estate")
+        .select("*")
+        .eq("featured", true)
+        .limit(2);
       if (error) throw error;
       return (data ?? []) as RealEstate[];
     },
@@ -57,25 +73,37 @@ function HomePage() {
       <Statistics />
 
       <Section title="Featured produce" eyebrow="From our farm" link="/products">
-        {products.isLoading ? <Loader /> : (
+        {products.isLoading ? (
+          <Loader />
+        ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {products.data?.map((p) => <ProductCard key={p.id} product={p} />)}
+            {products.data?.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
           </div>
         )}
       </Section>
 
       <Section title="Featured livestock" eyebrow="Native breeds" link="/livestock">
-        {livestock.isLoading ? <Loader /> : (
+        {livestock.isLoading ? (
+          <Loader />
+        ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {livestock.data?.map((l) => <LivestockCard key={l.id} item={l} />)}
+            {livestock.data?.map((l) => (
+              <LivestockCard key={l.id} item={l} />
+            ))}
           </div>
         )}
       </Section>
 
       <Section title="Featured real estate" eyebrow="Verified properties" link="/real-estate">
-        {realEstate.isLoading ? <Loader /> : (
+        {realEstate.isLoading ? (
+          <Loader />
+        ) : (
           <div className="grid md:grid-cols-2 gap-5">
-            {realEstate.data?.map((r) => <RealEstateCard key={r.id} item={r} />)}
+            {realEstate.data?.map((r) => (
+              <RealEstateCard key={r.id} item={r} />
+            ))}
           </div>
         )}
       </Section>
@@ -85,7 +113,17 @@ function HomePage() {
   );
 }
 
-function Section({ title, eyebrow, link, children }: { title: string; eyebrow: string; link: string; children: React.ReactNode }) {
+function Section({
+  title,
+  eyebrow,
+  link,
+  children,
+}: {
+  title: string;
+  eyebrow: string;
+  link: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6">
       <div className="flex items-end justify-between mb-10">
@@ -93,7 +131,10 @@ function Section({ title, eyebrow, link, children }: { title: string; eyebrow: s
           <div className="text-xs uppercase tracking-widest text-gold">{eyebrow}</div>
           <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold">{title}</h2>
         </div>
-        <Link to={link} className="hidden sm:inline-block text-sm text-muted-foreground hover:text-gold">
+        <Link
+          to={link}
+          className="hidden sm:inline-block text-sm text-muted-foreground hover:text-gold"
+        >
           View all →
         </Link>
       </div>

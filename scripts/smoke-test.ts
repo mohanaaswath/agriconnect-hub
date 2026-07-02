@@ -9,9 +9,7 @@
 import { createClient } from "@supabase/supabase-js";
 
 const url = process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL;
-const key =
-  process.env.VITE_SUPABASE_PUBLISHABLE_KEY ??
-  process.env.SUPABASE_PUBLISHABLE_KEY;
+const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_PUBLISHABLE_KEY;
 
 if (!url || !key) {
   console.error("Missing VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY");
@@ -50,17 +48,12 @@ await check("read real_estate", async () => {
 });
 
 await check("RLS blocks anon insert into orders", async () => {
-  const { error } = await supabase
-    .from("orders")
-    .insert({ total_amount: 1 } as never);
+  const { error } = await supabase.from("orders").insert({ total_amount: 1 } as never);
   if (!error) throw new Error("Expected RLS to block anonymous insert");
 });
 
 await check("RLS blocks anon read of user_roles", async () => {
-  const { data, error } = await supabase
-    .from("user_roles")
-    .select("user_id")
-    .limit(1);
+  const { data, error } = await supabase.from("user_roles").select("user_id").limit(1);
   // Either the request errors OR returns zero rows for anon — both acceptable.
   if (!error && data && data.length > 0) {
     throw new Error("Anon should not see user_roles rows");

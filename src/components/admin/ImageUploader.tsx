@@ -17,7 +17,15 @@ export function ImageUploader({
   multiple?: boolean;
 }) {
   const [uploading, setUploading] = useState(false);
-  const list = multiple ? (Array.isArray(value) ? value : value ? [value] : []) : value ? [value as string] : [];
+  const list = multiple
+    ? Array.isArray(value)
+      ? value
+      : value
+        ? [value]
+        : []
+    : value
+      ? [value as string]
+      : [];
 
   async function handle(files: FileList | null) {
     if (!files?.length) return;
@@ -43,7 +51,10 @@ export function ImageUploader({
     <div className="space-y-2">
       <div className="flex flex-wrap gap-2">
         {list.map((url) => (
-          <div key={url} className="relative w-20 h-20 rounded-md overflow-hidden group border border-border">
+          <div
+            key={url}
+            className="relative w-20 h-20 rounded-md overflow-hidden group border border-border"
+          >
             <img src={url} alt="" className="w-full h-full object-cover" />
             <button
               type="button"
@@ -55,8 +66,14 @@ export function ImageUploader({
           </div>
         ))}
         <label className="w-20 h-20 rounded-md border border-dashed border-border flex items-center justify-center cursor-pointer hover:bg-accent">
-          <input type="file" accept="image/*" multiple={multiple} className="hidden"
-            onChange={(e) => handle(e.target.files)} disabled={uploading} />
+          <input
+            type="file"
+            accept="image/*"
+            multiple={multiple}
+            className="hidden"
+            onChange={(e) => handle(e.target.files)}
+            disabled={uploading}
+          />
           <Upload className="w-5 h-5 text-muted-foreground" />
         </label>
       </div>

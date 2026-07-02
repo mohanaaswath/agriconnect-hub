@@ -51,8 +51,7 @@ export const useCart = create<CartState>()(
         })),
       clear: () => set({ items: [] }),
       count: () => get().items.reduce((n, i) => n + i.quantity, 0),
-      total: () =>
-        get().items.reduce((sum, i) => sum + discountedPrice(i.product) * i.quantity, 0),
+      total: () => get().items.reduce((sum, i) => sum + discountedPrice(i.product) * i.quantity, 0),
     }),
     { name: "dhandapani-cart" },
   ),

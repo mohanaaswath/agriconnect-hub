@@ -74,7 +74,10 @@ export function CheckoutModal({ open, onClose }: { open: boolean; onClose: () =>
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-md glass rounded-2xl p-6 relative"
             >
-              <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-md hover:bg-accent">
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 p-1.5 rounded-md hover:bg-accent"
+              >
                 <X className="w-5 h-5" />
               </button>
               <h2 className="font-display text-2xl font-bold mb-1">Checkout</h2>

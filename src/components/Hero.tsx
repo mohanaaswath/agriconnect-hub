@@ -4,10 +4,7 @@ import { ArrowRight, Leaf, ShieldCheck, Sprout } from "lucide-react";
 
 export function Hero() {
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ background: "var(--gradient-hero)" }}
-    >
+    <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
       <div
         className="absolute inset-0 opacity-30 pointer-events-none"
         style={{
@@ -44,8 +41,8 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto"
         >
-          Connect with trusted farmers for premium agricultural products, quality livestock,
-          and fertile Real estate. Experience the authentic taste of nature with our verified
+          Connect with trusted farmers for premium agricultural products, quality livestock, and
+          fertile Real estate. Experience the authentic taste of nature with our verified
           agricultural marketplace.
         </motion.p>
 
@@ -80,7 +77,10 @@ export function Hero() {
             { icon: Leaf, label: "Organic farms" },
             { icon: Sprout, label: "Native breeds" },
           ].map((t) => (
-            <div key={t.label} className="glass rounded-xl px-3 py-3 flex flex-col items-center gap-2">
+            <div
+              key={t.label}
+              className="glass rounded-xl px-3 py-3 flex flex-col items-center gap-2"
+            >
               <t.icon className="w-5 h-5 text-gold" />
               <span className="text-xs sm:text-sm text-muted-foreground">{t.label}</span>
             </div>

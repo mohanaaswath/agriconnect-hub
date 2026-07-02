@@ -13,7 +13,10 @@ export const Route = createFileRoute("/livestock")({
   head: () => ({
     meta: [
       { title: "Livestock — Dhandapani Farms" },
-      { name: "description", content: "Native breed cows, goats and more — verified livestock from Tamil Nadu farms." },
+      {
+        name: "description",
+        content: "Native breed cows, goats and more — verified livestock from Tamil Nadu farms.",
+      },
     ],
   }),
   component: LivestockPage,
@@ -26,7 +29,10 @@ function LivestockPage() {
   const { data, isLoading } = useQuery({
     queryKey: ["livestock"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("livestock").select("*").order("created_at", { ascending: false });
+      const { data, error } = await supabase
+        .from("livestock")
+        .select("*")
+        .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as Livestock[];
     },
@@ -37,7 +43,13 @@ function LivestockPage() {
     return list.filter((l) => {
       const matchCat = cat === "All" || l.category === cat;
       const term = q.trim().toLowerCase();
-      const matchQ = !term || [l.name, l.breed, l.category, l.description, l.location].filter(Boolean).join(" ").toLowerCase().includes(term);
+      const matchQ =
+        !term ||
+        [l.name, l.breed, l.category, l.description, l.location]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase()
+          .includes(term);
       return matchCat && matchQ;
     });
   }, [data, q, cat]);
@@ -47,7 +59,9 @@ function LivestockPage() {
       <div className="text-center mb-10">
         <div className="text-xs uppercase tracking-widest text-gold">Marketplace</div>
         <h1 className="mt-2 font-display text-4xl sm:text-5xl font-bold">Native livestock</h1>
-        <p className="mt-3 text-muted-foreground max-w-xl mx-auto">Verified, vaccinated, and farm-raised. Gir, Kangayam, native goats and more.</p>
+        <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
+          Verified, vaccinated, and farm-raised. Gir, Kangayam, native goats and more.
+        </p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
@@ -74,11 +88,17 @@ function LivestockPage() {
         <AddButton kind="livestock" label="+ Add Livestock" />
       </div>
 
-      {isLoading ? <Loader /> : filtered.length === 0 ? (
-        <div className="text-center py-20 text-muted-foreground">No livestock match your search.</div>
+      {isLoading ? (
+        <Loader />
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-20 text-muted-foreground">
+          No livestock match your search.
+        </div>
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((l) => <LivestockCard key={l.id} item={l} />)}
+          {filtered.map((l) => (
+            <LivestockCard key={l.id} item={l} />
+          ))}
         </div>
       )}
     </div>
