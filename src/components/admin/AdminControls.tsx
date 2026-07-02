@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 import { toast } from "sonner";
 import type { Product, Livestock, RealEstate } from "@/lib/types";
+import type { LucideIcon } from "lucide-react";
+
 import { ProductForm, LivestockForm, RealEstateForm, DeleteConfirm } from "./Forms";
 
 type Kind = "product" | "livestock" | "real_estate";

@@ -88,3 +88,13 @@ export interface Profile {
 export function discountedPrice(p: Pick<Product, "price" | "discount_percent">) {
   return p.discount_percent > 0 ? Math.round(p.price * (1 - p.discount_percent / 100)) : p.price;
 }
+
+export interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  message: string;
+  created_at: string;
+}
+
