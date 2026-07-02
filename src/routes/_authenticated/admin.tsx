@@ -332,15 +332,15 @@ function LivestockAdmin() {
   });
   const save = useMutation({
     mutationFn: async (p: Partial<Livestock>) => {
-      const payload: any = { ...p };
+      const payload: Record<string, unknown> = { ...p };
       delete payload.id;
       delete payload.livestock_code;
       delete payload.created_at;
       if (p.id) {
-        const { error } = await supabase.from("livestock").update(payload).eq("id", p.id);
+        const { error } = await supabase.from("livestock").update(payload as never).eq("id", p.id);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("livestock").insert(payload);
+        const { error } = await supabase.from("livestock").insert(payload as never);
         if (error) throw error;
       }
     },
@@ -429,15 +429,15 @@ function RealEstateAdmin() {
   });
   const save = useMutation({
     mutationFn: async (p: Partial<RealEstate>) => {
-      const payload: any = { ...p };
+      const payload: Record<string, unknown> = { ...p };
       delete payload.id;
       delete payload.property_code;
       delete payload.created_at;
       if (p.id) {
-        const { error } = await supabase.from("real_estate").update(payload).eq("id", p.id);
+        const { error } = await supabase.from("real_estate").update(payload as never).eq("id", p.id);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("real_estate").insert(payload);
+        const { error } = await supabase.from("real_estate").insert(payload as never);
         if (error) throw error;
       }
     },
