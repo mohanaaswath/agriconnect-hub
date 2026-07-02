@@ -23,7 +23,7 @@ import {
   DeleteConfirm,
 } from "@/components/admin/Forms";
 import { toast } from "sonner";
-import type { Product, Livestock, RealEstate } from "@/lib/types";
+import type { Product, Livestock, RealEstate, Order, ContactMessage } from "@/lib/types";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
