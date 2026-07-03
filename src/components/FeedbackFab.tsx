@@ -24,6 +24,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(0);
   const [message, setMessage] = useState("");
