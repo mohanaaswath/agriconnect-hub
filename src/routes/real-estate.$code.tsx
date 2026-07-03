@@ -150,7 +150,7 @@ function RealEstateDetail() {
             <div className="mt-8">
               <div className="text-xs uppercase tracking-widest text-gold mb-2">Suitable for</div>
               <div className="flex flex-wrap gap-2">
-                {data.suitable_for.map((s) => (
+                {data.suitable_for.map((s: string) => (
                   <span key={s} className="px-3 py-1 rounded-full bg-accent text-sm">
                     {s}
                   </span>
@@ -162,7 +162,7 @@ function RealEstateDetail() {
             <div className="mt-6">
               <div className="text-xs uppercase tracking-widest text-gold mb-2">Amenities</div>
               <div className="flex flex-wrap gap-2">
-                {data.amenities.map((s) => (
+                {data.amenities.map((s: string) => (
                   <span key={s} className="px-3 py-1 rounded-full bg-accent text-sm">
                     {s}
                   </span>
