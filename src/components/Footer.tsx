@@ -70,9 +70,8 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-border py-5 flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-muted-foreground">
-        <span>© {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.</span>
-        <FeedbackFab variant="footer" />
+      <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
+        © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
       </div>
     </footer>
   );
