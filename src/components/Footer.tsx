@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { BUSINESS } from "@/lib/constants";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { FeedbackFab } from "@/components/FeedbackFab";
 
 export function Footer() {
   return (
