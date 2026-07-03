@@ -19,7 +19,7 @@ const feedbackSchema = z.object({
   message: z.string().trim().min(3, "Please write a short message").max(2000),
 });
 
-export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" }) {
+export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" | "section" }) {
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
