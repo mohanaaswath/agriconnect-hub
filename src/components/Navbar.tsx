@@ -122,51 +122,65 @@ export function Navbar() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background/95 backdrop-blur-xl lg:hidden"
-          >
-            <div className="flex justify-between items-center p-4 border-b border-border">
-              <span className="font-display font-bold">Menu</span>
-              <button onClick={() => setOpen(false)} className="p-2 rounded-md hover:bg-accent">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <nav className="flex flex-col p-4 gap-1">
-              {NAV.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm lg:hidden"
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.25 }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-[80%] max-w-sm bg-background border-l border-border shadow-2xl lg:hidden flex flex-col"
+            >
+              <div className="flex justify-between items-center p-4 border-b border-border">
+                <span className="font-display font-bold">Menu</span>
+                <button
                   onClick={() => setOpen(false)}
-                  className="px-4 py-3 text-base font-medium rounded-md hover:bg-accent"
+                  className="p-2 rounded-md hover:bg-accent"
                 >
-                  {item.label}
-                </Link>
-              ))}
-              {!user && (
-                <Link
-                  to="/auth"
-                  onClick={() => setOpen(false)}
-                  className="px-4 py-3 text-base font-medium rounded-md border border-border mt-2"
-                >
-                  Sign in
-                </Link>
-              )}
-              {isAdmin && (
-                <Link
-                  to="/admin"
-                  onClick={() => setOpen(false)}
-                  className="px-4 py-3 text-base font-medium rounded-md border border-gold/40 text-gold mt-2"
-                >
-                  Admin Dashboard
-                </Link>
-              )}
-            </nav>
-          </motion.div>
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <nav className="flex flex-col p-4 gap-1 overflow-y-auto">
+                {NAV.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setOpen(false)}
+                    className="px-4 py-3 text-base font-medium rounded-md hover:bg-accent"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                {!user && (
+                  <Link
+                    to="/auth"
+                    onClick={() => setOpen(false)}
+                    className="px-4 py-3 text-base font-medium rounded-md border border-border mt-2"
+                  >
+                    Sign in
+                  </Link>
+                )}
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setOpen(false)}
+                    className="px-4 py-3 text-base font-medium rounded-md border border-gold/40 text-gold mt-2"
+                  >
+                    Admin Dashboard
+                  </Link>
+                )}
+              </nav>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
+
     </header>
   );
 }
