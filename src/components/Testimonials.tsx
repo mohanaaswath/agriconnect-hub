@@ -14,9 +14,7 @@ export function Testimonials() {
       const { data, error } = await supabase
         .from("feedback")
         .select("id, name, role, rating, message, created_at")
-        .eq("approved", true)
-        .order("created_at", { ascending: false })
-        .limit(6);
+        .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as FeedbackRow[];
     },
