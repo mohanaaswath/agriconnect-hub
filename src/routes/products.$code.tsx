@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { Leaf, ShoppingCart, Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Product } from "@/lib/types";
@@ -9,36 +8,117 @@ import { useCart } from "@/stores/cart";
 import { toast } from "sonner";
 import { productInquiry } from "@/lib/whatsapp";
 
+const BASE_URL = "https://farm-first-connect.lovable.app";
+
 export const Route = createFileRoute("/products/$code")({
+  loader: async ({ params }) => {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("product_code", params.code)
+      .maybeSingle();
+    if (error) throw error;
+    return (data as Product | null) ?? null;
+  },
+  head: ({ params, loaderData }) => {
+    const item = loaderData;
+    const url = `${BASE_URL}/products/${params.code}`;
+    const title = item
+      ? `${item.name} — Dhandapani Farms`.slice(0, 60)
+      : "Product — Dhandapani Farms";
+    const rawDesc =
+      item?.description ||
+      `Buy ${item?.name ?? "farm produce"} direct from Dhandapani Farms in Tamil Nadu.`;
+    const description = rawDesc.length < 60 ? `${rawDesc} Direct from Tamil Nadu farms.` : rawDesc;
+    const meta = [
+      { title },
+      { name: "description", content: description.slice(0, 160) },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description.slice(0, 160) },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: url },
+    ];
+    if (item?.image_url) {
+      meta.push({ property: "og:image", content: item.image_url });
+      meta.push({ name: "twitter:image", content: item.image_url });
+    }
+    const scripts = item
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: item.name,
+              description: item.description ?? undefined,
+              sku: item.product_code,
+              image: item.image_url ?? undefined,
+              category: item.category ?? undefined,
+              brand: { "@type": "Brand", name: "Dhandapani Farms" },
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "INR",
+                price: discountedPrice(item),
+                availability:
+                  item.stock > 0
+                    ? "https://schema.org/InStock"
+                    : "https://schema.org/OutOfStock",
+                url,
+              },
+              aggregateRating:
+                item.rating > 0 && item.reviews > 0
+                  ? {
+                      "@type": "AggregateRating",
+                      ratingValue: item.rating,
+                      reviewCount: item.reviews,
+                    }
+                  : undefined,
+            }),
+          },
+        ]
+      : undefined;
+    return { meta, links: [{ rel: "canonical", href: url }], scripts };
+  },
   component: ProductDetail,
+  errorComponent: ProductError,
+  notFoundComponent: ProductNotFound,
+  pendingComponent: () => <Loader />,
 });
 
-function ProductDetail() {
-  const { code } = Route.useParams();
-  const add = useCart((s) => s.add);
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["product", code],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("products")
-        .select("*")
-        .eq("product_code", code)
-        .maybeSingle();
-      if (error) throw error;
-      return data as Product | null;
-    },
-  });
+function ProductNotFound() {
+  return (
+    <div className="text-center py-32">
+      <p className="text-muted-foreground">Product not found.</p>
+      <Link to="/products" className="mt-4 inline-block text-gold">
+        ← All products
+      </Link>
+    </div>
+  );
+}
 
-  if (isLoading) return <Loader />;
-  if (error || !data)
-    return (
-      <div className="text-center py-32">
-        <p className="text-muted-foreground">Product not found.</p>
-        <Link to="/products" className="mt-4 inline-block text-gold">
-          ← All products
-        </Link>
-      </div>
-    );
+function ProductError({ reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+  return (
+    <div className="text-center py-32">
+      <p className="text-muted-foreground">Couldn't load this product.</p>
+      <button
+        onClick={() => {
+          router.invalidate();
+          reset();
+        }}
+        className="mt-4 inline-block text-gold"
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+
+function ProductDetail() {
+  const data = Route.useLoaderData();
+  const add = useCart((s) => s.add);
+
+  if (!data) return <ProductNotFound />;
 
   const price = discountedPrice(data);
 
