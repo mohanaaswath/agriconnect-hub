@@ -14,6 +14,7 @@ const feedbackSchema = z.object({
     .email("Invalid email")
     .optional()
     .or(z.literal("")),
+  role: z.string().trim().max(100).optional().or(z.literal("")),
   rating: z.number().int().min(1).max(5),
   message: z.string().trim().min(3, "Please write a short message").max(2000),
 });
