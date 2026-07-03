@@ -10,7 +10,6 @@ import type { LucideIcon } from "lucide-react";
 
 import { ProductForm, LivestockForm, RealEstateForm, DeleteConfirm } from "./Forms";
 
-
 type Kind = "product" | "livestock" | "real_estate";
 
 type BaseItem = Product | Livestock | RealEstate;
@@ -45,8 +44,6 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
   const qc = useQueryClient();
   const m = META[kind];
 
-
-
   const save = useMutation({
     mutationFn: async (p: Record<string, unknown>) => {
       const payload = { ...p };
@@ -67,7 +64,6 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
   if (!isAdmin) return null;
 
   return (
-
     <>
       <button
         onClick={() => setOpen(true)}
@@ -116,9 +112,6 @@ export function AdminRowControls({
   const qc = useQueryClient();
   const m = META[kind];
 
-
-
-
   const save = useMutation({
     mutationFn: async (p: Record<string, unknown>) => {
       const payload = { ...p };
@@ -156,7 +149,6 @@ export function AdminRowControls({
   if (!isAdmin) return null;
 
   return (
-
     <>
       <div className="flex gap-2 px-4 pb-4 -mt-2">
         <button

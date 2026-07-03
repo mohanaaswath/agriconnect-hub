@@ -42,8 +42,6 @@ function AdminPage() {
 
   if (loading || !isAdmin) return <Loader />;
 
-
-
   const tabs: { key: Tab; label: string; icon: LucideIcon }[] = [
     { key: "dashboard", label: "Overview", icon: LayoutDashboard },
     { key: "products", label: "Products", icon: ShoppingBag },
