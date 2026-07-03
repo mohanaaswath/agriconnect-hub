@@ -51,7 +51,7 @@ function ContactPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid md:grid-cols-2 gap-10">
       <div>
         <div className="text-xs uppercase tracking-widest text-gold">Get in touch</div>
-        <h1 className="mt-2 font-display text-4xl font-bold">Let's grow together.</h1>
+        <h1 className="mt-2 font-display text-4xl font-bold">Contact Dhandapani Farms</h1>
         <p className="mt-4 text-muted-foreground">
           Whether you're after a kilo of bananas or 50 acres of farmland, we'd love to hear from
           you.
