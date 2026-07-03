@@ -17,7 +17,7 @@ function LivestockDetail() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("livestock")
-        .select("*")
+        .select("id, livestock_code, name, description, price, category, breed, age, weight, milk_yield, health, vaccination, location, seller_name, seller_phone, seller_rating, seller_verified, images, featured, created_at")
         .eq("livestock_code", code)
         .maybeSingle();
       if (error) throw error;
