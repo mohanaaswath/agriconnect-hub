@@ -164,8 +164,8 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
-        <WhatsAppFab />
         <FeedbackFab />
+        <WhatsAppFab />
         <BackToTop />
         <CartDrawer />
         <Toaster

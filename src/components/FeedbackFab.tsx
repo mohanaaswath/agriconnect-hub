@@ -72,7 +72,7 @@ export function FeedbackFab() {
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Send feedback"
-        className="fixed bottom-24 right-6 z-30 h-14 w-14 rounded-full bg-gold text-background shadow-glow flex items-center justify-center hover:scale-105 transition"
+        className="fixed bottom-28 right-6 z-30 h-14 w-14 rounded-full bg-gold text-background shadow-glow flex items-center justify-center hover:scale-105 transition"
       >
         <MessageCircle className="w-6 h-6" />
       </button>
