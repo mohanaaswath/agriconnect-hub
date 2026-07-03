@@ -30,7 +30,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-navbar-border bg-navbar text-navbar-foreground shadow-nav backdrop-blur-xl">
-      <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-3 sm:px-6">
+      <div className="mx-auto grid min-h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-3 py-2 sm:px-6 xl:grid-cols-[minmax(12rem,1fr)_auto_auto] xl:py-0">
         <Link to="/" className="group flex min-w-0 items-center gap-2">
           <img
             src={logoAsset.url}
@@ -47,7 +47,7 @@ export function Navbar() {
           </div>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden items-center gap-1 xl:flex">
           {NAV.map((item) => (
             <Link
               key={item.to}
@@ -66,7 +66,7 @@ export function Navbar() {
             href={waLink("Hello Dhandapani Farms!")}
             target="_blank"
             rel="noreferrer"
-            className="hidden items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90 md:inline-flex"
+            className="hidden items-center gap-2 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90 xl:inline-flex"
           >
             <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
               <path d="M20.5 3.5A12 12 0 0 0 3.3 19l-1.3 4.8 5-1.3a12 12 0 0 0 13.6-19zm-8.5 18a10 10 0 0 1-5-1.3l-.4-.2-3 .8.8-2.9-.2-.4A10 10 0 1 1 22 12a10 10 0 0 1-10 9.5zm5.5-7c-.3-.2-1.8-.9-2-1s-.5-.2-.7.1-.8 1-1 1.2-.4.2-.7 0-1.3-.5-2.5-1.5a9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4c.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-1 2.2c0 1.3 1 2.6 1.1 2.7s2 3 4.8 4.2c.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 2-1.4s.3-1.2.2-1.3z" />
@@ -92,7 +92,7 @@ export function Navbar() {
               {isAdmin && (
                 <Link
                   to="/admin"
-                  className="hidden items-center gap-1 rounded-md border border-navbar-border px-3 py-2 text-sm font-semibold text-gold hover:bg-secondary sm:inline-flex"
+                  className="hidden items-center gap-1 rounded-md border border-navbar-border px-3 py-2 text-sm font-semibold text-gold hover:bg-secondary xl:inline-flex"
                 >
                   <ShieldCheck className="w-4 h-4" /> Admin
                 </Link>
@@ -108,7 +108,7 @@ export function Navbar() {
           ) : (
             <Link
               to="/auth"
-              className="hidden rounded-md border border-navbar-border px-3 py-2 text-sm font-semibold text-navbar-foreground hover:bg-secondary sm:inline-flex"
+              className="hidden rounded-md border border-navbar-border px-3 py-2 text-sm font-semibold text-navbar-foreground hover:bg-secondary xl:inline-flex"
             >
               Sign in
             </Link>
@@ -116,7 +116,7 @@ export function Navbar() {
 
           <button
             onClick={() => setOpen(true)}
-            className="rounded-md border border-navbar-border bg-secondary p-2 text-navbar-foreground hover:bg-accent lg:hidden"
+            className="rounded-md border border-navbar-border bg-secondary p-2 text-navbar-foreground hover:bg-accent xl:hidden"
             aria-label="Menu"
           >
             <Menu className="w-5 h-5" />
@@ -132,14 +132,14 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-50 bg-background/85 backdrop-blur-sm lg:hidden"
+               className="fixed inset-0 z-50 bg-background/85 backdrop-blur-sm xl:hidden"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.25 }}
-              className="fixed inset-y-0 right-0 z-50 flex h-dvh max-h-dvh min-h-dvh w-full flex-col overflow-hidden border-l border-navbar-border bg-navbar-panel text-navbar-panel-foreground shadow-2xl sm:w-[24rem] lg:hidden"
+               className="fixed inset-y-0 right-0 z-50 flex h-dvh max-h-dvh min-h-dvh w-full flex-col overflow-hidden border-l border-navbar-border bg-navbar-panel text-navbar-panel-foreground shadow-2xl sm:w-[24rem] xl:hidden"
             >
               <div className="flex shrink-0 items-center justify-between border-b border-navbar-border px-4 py-3 max-[360px]:py-2">
                 <span className="font-display text-lg font-bold text-gold">Menu</span>
