@@ -57,7 +57,7 @@ function HomePage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("real_estate")
-        .select("*")
+        .select("id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at")
         .eq("featured", true)
         .limit(2);
       if (error) throw error;
