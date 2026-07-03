@@ -14,6 +14,7 @@ const feedbackSchema = z.object({
     .email("Invalid email")
     .optional()
     .or(z.literal("")),
+  role: z.string().trim().max(100).optional().or(z.literal("")),
   rating: z.number().int().min(1).max(5),
   message: z.string().trim().min(3, "Please write a short message").max(2000),
 });
@@ -23,6 +24,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(0);
   const [message, setMessage] = useState("");
@@ -31,6 +33,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
   const reset = () => {
     setName("");
     setEmail("");
+    setRole("");
     setRating(5);
     setMessage("");
     setHover(0);
@@ -41,6 +44,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
     const parsed = feedbackSchema.safeParse({
       name: name || user?.user_metadata?.full_name || user?.email || "",
       email: email || user?.email || "",
+      role: role || "",
       rating,
       message,
     });
@@ -52,6 +56,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
     const { error } = await supabase.from("feedback").insert({
       name: parsed.data.name,
       email: parsed.data.email ? parsed.data.email : null,
+      role: parsed.data.role ? parsed.data.role : null,
       rating: parsed.data.rating,
       message: parsed.data.message,
       user_id: user?.id ?? null,
@@ -131,6 +136,16 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
                   onChange={(e) => setEmail(e.target.value)}
                   maxLength={255}
                   placeholder={user?.email || "you@example.com"}
+                  className="mt-1 w-full rounded-md bg-background/60 border border-border px-3 py-2 text-sm"
+                />
+              </div>
+              <div>
+                <label className="text-xs text-muted-foreground">Role / location (optional)</label>
+                <input
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  maxLength={100}
+                  placeholder="e.g. Dairy farmer, Erode"
                   className="mt-1 w-full rounded-md bg-background/60 border border-border px-3 py-2 text-sm"
                 />
               </div>
