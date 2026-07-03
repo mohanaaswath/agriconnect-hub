@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Pencil,
@@ -36,22 +36,13 @@ function AdminPage() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("dashboard");
 
-  if (loading) return <Loader />;
-  if (!isAdmin)
-    return (
-      <div className="max-w-md mx-auto py-32 text-center">
-        <h1 className="font-display text-2xl font-bold">Admins only</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          You're signed in, but your account doesn't have admin access.
-        </p>
-        <button
-          onClick={() => navigate({ to: "/" })}
-          className="mt-6 px-4 py-2 rounded-md bg-primary text-primary-foreground"
-        >
-          Back home
-        </button>
-      </div>
-    );
+  useEffect(() => {
+    if (!loading && !isAdmin) navigate({ to: "/products", replace: true });
+  }, [loading, isAdmin, navigate]);
+
+  if (loading || !isAdmin) return <Loader />;
+
+
 
   const tabs: { key: Tab; label: string; icon: LucideIcon }[] = [
     { key: "dashboard", label: "Overview", icon: LayoutDashboard },
