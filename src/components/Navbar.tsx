@@ -132,16 +132,16 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-50 bg-background/85 backdrop-blur-sm lg:hidden"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.25 }}
-              className="fixed right-0 top-0 bottom-0 z-50 flex w-[86%] max-w-sm flex-col border-l border-navbar-border bg-navbar-panel text-navbar-panel-foreground shadow-2xl lg:hidden"
+              className="fixed inset-y-0 right-0 z-50 flex h-dvh max-h-dvh min-h-dvh w-full flex-col overflow-hidden border-l border-navbar-border bg-navbar-panel text-navbar-panel-foreground shadow-2xl sm:w-[24rem] lg:hidden"
             >
-              <div className="flex items-center justify-between border-b border-navbar-border p-4">
+              <div className="flex shrink-0 items-center justify-between border-b border-navbar-border px-4 py-3 max-[360px]:py-2">
                 <span className="font-display text-lg font-bold text-gold">Menu</span>
                 <button
                   onClick={() => setOpen(false)}
@@ -151,13 +151,13 @@ export function Navbar() {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <nav className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-hidden p-3">
+              <nav className="grid shrink-0 grid-cols-1 gap-2 p-4 max-[360px]:gap-1.5 max-[360px]:p-3">
                 {NAV.map((item) => (
                   <Link
                     key={item.to}
                     to={item.to}
                     onClick={() => setOpen(false)}
-                    className="rounded-md border border-navbar-border bg-background/35 px-3 py-2.5 text-sm font-semibold text-navbar-panel-foreground hover:bg-gold hover:text-gold-foreground"
+                    className="flex min-h-11 items-center rounded-md border border-navbar-border bg-background/35 px-4 py-0 text-base font-semibold text-navbar-panel-foreground hover:bg-gold hover:text-gold-foreground max-[360px]:min-h-10 max-[360px]:text-sm"
                   >
                     {item.label}
                   </Link>
@@ -166,7 +166,7 @@ export function Navbar() {
                   <Link
                     to="/auth"
                     onClick={() => setOpen(false)}
-                    className="mt-1 rounded-md border border-navbar-border bg-gold px-3 py-2.5 text-sm font-bold text-gold-foreground"
+                    className="mt-1 flex min-h-11 items-center rounded-md border border-navbar-border bg-gold px-4 py-0 text-base font-bold text-gold-foreground max-[360px]:min-h-10 max-[360px]:text-sm"
                   >
                     Sign in
                   </Link>
@@ -175,7 +175,7 @@ export function Navbar() {
                   <Link
                     to="/admin"
                     onClick={() => setOpen(false)}
-                    className="mt-1 rounded-md border border-navbar-border bg-background/35 px-3 py-2.5 text-sm font-bold text-gold"
+                    className="mt-1 flex min-h-11 items-center rounded-md border border-navbar-border bg-background/35 px-4 py-0 text-base font-bold text-gold max-[360px]:min-h-10 max-[360px]:text-sm"
                   >
                     Admin Dashboard
                   </Link>
