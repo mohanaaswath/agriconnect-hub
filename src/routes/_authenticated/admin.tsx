@@ -83,6 +83,7 @@ function AdminPage() {
       {tab === "real_estate" && <RealEstateAdmin />}
       {tab === "orders" && <OrdersAdmin />}
       {tab === "messages" && <MessagesAdmin />}
+      {tab === "feedback" && <FeedbackAdmin />}
     </div>
   );
 }
