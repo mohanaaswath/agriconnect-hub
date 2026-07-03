@@ -45,7 +45,7 @@ function HomePage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("livestock")
-        .select("*")
+        .select("id, livestock_code, name, description, price, category, breed, age, weight, milk_yield, health, vaccination, location, seller_rating, seller_verified, images, featured, created_at")
         .eq("featured", true)
         .limit(3);
       if (error) throw error;
