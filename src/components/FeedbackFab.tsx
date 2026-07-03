@@ -44,6 +44,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
     const parsed = feedbackSchema.safeParse({
       name: name || user?.user_metadata?.full_name || user?.email || "",
       email: email || user?.email || "",
+      role: role || "",
       rating,
       message,
     });
@@ -55,6 +56,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
     const { error } = await supabase.from("feedback").insert({
       name: parsed.data.name,
       email: parsed.data.email ? parsed.data.email : null,
+      role: parsed.data.role ? parsed.data.role : null,
       rating: parsed.data.rating,
       message: parsed.data.message,
       user_id: user?.id ?? null,
