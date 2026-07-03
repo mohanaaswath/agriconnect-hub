@@ -75,30 +75,36 @@ export type Database = {
       }
       feedback: {
         Row: {
+          approved: boolean
           created_at: string
           email: string | null
           id: string
           message: string
           name: string
           rating: number
+          role: string | null
           user_id: string | null
         }
         Insert: {
+          approved?: boolean
           created_at?: string
           email?: string | null
           id?: string
           message: string
           name: string
           rating: number
+          role?: string | null
           user_id?: string | null
         }
         Update: {
+          approved?: boolean
           created_at?: string
           email?: string | null
           id?: string
           message?: string
           name?: string
           rating?: number
+          role?: string | null
           user_id?: string | null
         }
         Relationships: []
