@@ -25,7 +25,7 @@ function RealEstateDetail() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("real_estate")
-        .select("*")
+        .select("id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at")
         .eq("property_code", code)
         .maybeSingle();
       if (error) throw error;
@@ -112,8 +112,8 @@ function RealEstateDetail() {
             )}
             <div className="my-5 h-px bg-border" />
             <div className="text-xs uppercase tracking-widest text-gold">Owner</div>
-            <div className="mt-1 font-semibold">{data.owner_name}</div>
-            <div className="text-sm text-muted-foreground">{data.owner_phone}</div>
+            <div className="mt-1 font-semibold">{data.verified ? "Verified owner" : "Listed owner"}</div>
+            <div className="text-sm text-muted-foreground">Contact via WhatsApp inquiry below.</div>
             <a
               href={propertyInquiry(data.name, data.property_code)}
               target="_blank"

@@ -17,7 +17,7 @@ function LivestockDetail() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("livestock")
-        .select("*")
+        .select("id, livestock_code, name, description, price, category, breed, age, weight, milk_yield, health, vaccination, location, seller_rating, seller_verified, images, featured, created_at")
         .eq("livestock_code", code)
         .maybeSingle();
       if (error) throw error;
@@ -74,10 +74,10 @@ function LivestockDetail() {
         <div className="mt-6 glass rounded-xl p-4">
           <div className="text-xs uppercase tracking-widest text-gold">Seller</div>
           <div className="mt-1 font-semibold flex items-center gap-2">
-            {data.seller_name}
+            Verified seller
             {data.seller_verified && <CheckCircle2 className="w-4 h-4 text-success" />}
           </div>
-          <div className="text-sm text-muted-foreground">{data.seller_phone}</div>
+          <div className="text-sm text-muted-foreground">Contact via WhatsApp inquiry below.</div>
         </div>
 
         <a

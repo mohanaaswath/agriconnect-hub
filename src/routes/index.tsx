@@ -45,7 +45,7 @@ function HomePage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("livestock")
-        .select("*")
+        .select("id, livestock_code, name, description, price, category, breed, age, weight, milk_yield, health, vaccination, location, seller_rating, seller_verified, images, featured, created_at")
         .eq("featured", true)
         .limit(3);
       if (error) throw error;
@@ -57,7 +57,7 @@ function HomePage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("real_estate")
-        .select("*")
+        .select("id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at")
         .eq("featured", true)
         .limit(2);
       if (error) throw error;
