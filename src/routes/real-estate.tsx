@@ -30,7 +30,9 @@ function RealEstatePage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("real_estate")
-        .select("id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at")
+        .select(
+          "id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at",
+        )
         .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as RealEstate[];
