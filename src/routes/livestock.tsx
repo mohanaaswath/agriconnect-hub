@@ -84,6 +84,7 @@ function LivestockPage() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search by breed, location…"
+            aria-label="Search livestock"
             className="w-full pl-10 pr-3 py-2.5 bg-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
