@@ -50,6 +50,7 @@ function AdminPage() {
     { key: "real_estate", label: "Real Estate", icon: Trees },
     { key: "orders", label: "Orders", icon: ClipboardList },
     { key: "messages", label: "Messages", icon: MessageSquare },
+    { key: "feedback", label: "Feedback", icon: Star },
   ];
 
   return (
