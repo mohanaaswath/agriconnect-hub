@@ -31,7 +31,7 @@ function LivestockPage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("livestock")
-        .select("*")
+        .select("id, livestock_code, name, description, price, category, breed, age, weight, milk_yield, health, vaccination, location, seller_rating, seller_verified, images, featured, created_at")
         .order("created_at", { ascending: false });
       if (error) throw error;
       return (data ?? []) as Livestock[];
