@@ -33,6 +33,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
   const reset = () => {
     setName("");
     setEmail("");
+    setRole("");
     setRating(5);
     setMessage("");
     setHover(0);
