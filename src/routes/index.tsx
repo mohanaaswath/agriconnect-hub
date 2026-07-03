@@ -16,13 +16,24 @@ import { Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dhandapani Farms — Premium Agriculture Marketplace" },
+      { title: "Dhandapani Farms — Premium Agriculture Marketplace in Tamil Nadu" },
       {
         name: "description",
         content:
-          "Shop fresh produce, native livestock and verified real estate from Tamil Nadu's trusted family-run farm.",
+          "Shop fresh produce, native livestock and verified agricultural real estate direct from Tamil Nadu's trusted family-run Dhandapani Farms.",
       },
+      {
+        property: "og:title",
+        content: "Dhandapani Farms — Premium Agriculture Marketplace in Tamil Nadu",
+      },
+      {
+        property: "og:description",
+        content:
+          "Fresh produce, native livestock and verified real estate — direct from a family-run farm in Tamil Nadu.",
+      },
+      { property: "og:url", content: "https://farm-first-connect.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://farm-first-connect.lovable.app/" }],
   }),
   component: HomePage,
 });
