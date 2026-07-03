@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "sonner";
 import type { Product, Livestock, RealEstate } from "@/lib/types";
 import type { LucideIcon } from "lucide-react";
 
 import { ProductForm, LivestockForm, RealEstateForm, DeleteConfirm } from "./Forms";
+
 
 type Kind = "product" | "livestock" | "real_estate";
 
@@ -38,9 +40,12 @@ const META: Record<
 };
 
 export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
+  const { isAdmin } = useAuth();
   const [open, setOpen] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
+  if (!isAdmin) return null;
+
 
   const save = useMutation({
     mutationFn: async (p: Record<string, unknown>) => {
@@ -102,10 +107,13 @@ export function AdminRowControls({
   kind: Kind;
   item: Product | Livestock | RealEstate;
 }) {
+  const { isAdmin } = useAuth();
   const [editing, setEditing] = useState(false);
   const [del, setDel] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
+  if (!isAdmin) return null;
+
 
   const save = useMutation({
     mutationFn: async (p: Record<string, unknown>) => {
