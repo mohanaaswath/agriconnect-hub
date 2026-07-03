@@ -18,7 +18,7 @@ const REAL_ESTATE_COLUMNS =
   "id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at";
 
 export const Route = createFileRoute("/real-estate/$code")({
-  loader: async ({ params }) => {
+  loader: async ({ params }): Promise<RealEstate | null> => {
     const { data, error } = await supabase
       .from("real_estate")
       .select(REAL_ESTATE_COLUMNS)
