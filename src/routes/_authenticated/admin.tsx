@@ -9,6 +9,7 @@ import {
   Trees,
   ClipboardList,
   MessageSquare,
+  Star,
   LayoutDashboard,
   type LucideIcon,
 } from "lucide-react";
