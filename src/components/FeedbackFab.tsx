@@ -19,7 +19,7 @@ const feedbackSchema = z.object({
   message: z.string().trim().min(3, "Please write a short message").max(2000),
 });
 
-export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" }) {
+export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" | "section" }) {
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -82,11 +82,20 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
         >
           <MessageCircle className="w-6 h-6" />
         </button>
-      ) : (
+      ) : variant === "footer" ? (
         <button
           type="button"
           onClick={() => setOpen(true)}
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-gold transition"
+        >
+          <MessageCircle className="w-4 h-4" />
+          Send feedback
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-gold text-background text-sm font-semibold hover:opacity-90 transition"
         >
           <MessageCircle className="w-4 h-4" />
           Send feedback

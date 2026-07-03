@@ -2,6 +2,7 @@ import { Star } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader } from "@/components/Loader";
+import { FeedbackFab } from "@/components/FeedbackFab";
 import type { Database } from "@/integrations/supabase/types";
 
 type FeedbackRow = Database["public"]["Tables"]["feedback"]["Row"];
@@ -29,6 +30,9 @@ export function Testimonials() {
           <h2 className="mt-2 font-display text-3xl sm:text-4xl font-bold">
             Trusted by buyers across Tamil Nadu
           </h2>
+          <div className="mt-6">
+            <FeedbackFab variant="section" />
+          </div>
         </div>
 
         {isLoading ? (
