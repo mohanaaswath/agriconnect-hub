@@ -44,7 +44,7 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
   const [open, setOpen] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
-  if (!isAdmin) return null;
+
 
 
   const save = useMutation({
@@ -64,7 +64,10 @@ export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
     onError: (e) => toast.error((e as Error).message),
   });
 
+  if (!isAdmin) return null;
+
   return (
+
     <>
       <button
         onClick={() => setOpen(true)}
@@ -112,7 +115,8 @@ export function AdminRowControls({
   const [del, setDel] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
-  if (!isAdmin) return null;
+
+
 
 
   const save = useMutation({
@@ -149,7 +153,10 @@ export function AdminRowControls({
     onError: (e) => toast.error((e as Error).message),
   });
 
+  if (!isAdmin) return null;
+
   return (
+
     <>
       <div className="flex gap-2 px-4 pb-4 -mt-2">
         <button
