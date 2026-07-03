@@ -140,6 +140,16 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" })
                 />
               </div>
               <div>
+                <label className="text-xs text-muted-foreground">Role / location (optional)</label>
+                <input
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  maxLength={100}
+                  placeholder="e.g. Dairy farmer, Erode"
+                  className="mt-1 w-full rounded-md bg-background/60 border border-border px-3 py-2 text-sm"
+                />
+              </div>
+              <div>
                 <label className="text-xs text-muted-foreground">Rating</label>
                 <div className="mt-1 flex gap-1">
                   {[1, 2, 3, 4, 5].map((n) => (
