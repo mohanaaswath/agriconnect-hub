@@ -22,7 +22,7 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-6 font-display text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.05] max-w-4xl mx-auto tracking-wide"
         >
-          DHANDAPANI FARMER
+          Dhandapani Farms — Premium Agriculture Marketplace
         </motion.h1>
 
         <motion.div
