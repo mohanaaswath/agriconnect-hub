@@ -74,18 +74,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Dhandapani Farms — Premium Agriculture Marketplace" },
+      { title: "Dhandapani Farms" },
       {
         name: "description",
         content:
           "Premium agriculture marketplace for fresh farm produce, native livestock and verified real estate in Tamil Nadu.",
       },
       { name: "author", content: "Dhandapani Farms" },
-      { property: "og:title", content: "Dhandapani Farms — Premium Agriculture Marketplace" },
-      {
-        property: "og:description",
-        content: "Fresh produce, native livestock and real estate — direct from the farmer.",
-      },
+      { property: "og:site_name", content: "Dhandapani Farms" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -96,6 +92,44 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://farm-first-connect.lovable.app/#organization",
+              name: "Dhandapani Farms",
+              url: "https://farm-first-connect.lovable.app",
+              logo: "https://farm-first-connect.lovable.app/favicon.png",
+              email: "supreetsupreet443@gmail.com",
+              telephone: "+91 91766 77275",
+              foundingDate: "1985",
+            },
+            {
+              "@type": "LocalBusiness",
+              "@id": "https://farm-first-connect.lovable.app/#localbusiness",
+              name: "Dhandapani Farms",
+              url: "https://farm-first-connect.lovable.app",
+              image: "https://farm-first-connect.lovable.app/favicon.png",
+              telephone: "+91 91766 77275",
+              email: "supreetsupreet443@gmail.com",
+              priceRange: "₹",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Dhandapani Thootam Amman Oil Mill Opposite",
+                addressLocality: "Muthur, Kangayam Taluk",
+                addressRegion: "Tamil Nadu",
+                postalCode: "638105",
+                addressCountry: "IN",
+              },
+            },
+          ],
+        }),
       },
     ],
   }),
