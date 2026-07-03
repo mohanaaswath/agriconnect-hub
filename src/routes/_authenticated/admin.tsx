@@ -671,13 +671,25 @@ function FeedbackAdmin() {
     onSuccess: () => {
       toast.success("Deleted");
       qc.invalidateQueries({ queryKey: ["admin-feedback"] });
+      qc.invalidateQueries({ queryKey: ["approved-testimonials"] });
+    },
+  });
+  const toggleApproved = useMutation({
+    mutationFn: async ({ id, approved }: { id: string; approved: boolean }) => {
+      const { error } = await supabase.from("feedback").update({ approved }).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Updated");
+      qc.invalidateQueries({ queryKey: ["admin-feedback"] });
+      qc.invalidateQueries({ queryKey: ["approved-testimonials"] });
     },
   });
   if (isLoading) return <Loader />;
   return (
     <div className="space-y-3">
       {data.map((f) => (
-        <div key={f.id} className="glass rounded-xl p-4">
+        <div key={f.id} className={`glass rounded-xl p-4 ${f.approved ? "border-l-4 border-l-gold" : ""}`}>
           <div className="flex justify-between items-start gap-3">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
@@ -690,9 +702,8 @@ function FeedbackAdmin() {
                     />
                   ))}
                 </div>
-                {f.email && (
-                  <span className="text-xs text-muted-foreground">· {f.email}</span>
-                )}
+                {f.role && <span className="text-xs text-muted-foreground">· {f.role}</span>}
+                {f.email && <span className="text-xs text-muted-foreground">· {f.email}</span>}
               </div>
               <p className="mt-2 text-sm text-muted-foreground whitespace-pre-wrap">
                 {f.message}
@@ -701,13 +712,25 @@ function FeedbackAdmin() {
                 {new Date(f.created_at).toLocaleString()}
               </div>
             </div>
-            <button
-              onClick={() => remove.mutate(f.id)}
-              className="p-2 rounded-md hover:bg-destructive/10 text-destructive"
-              aria-label="Delete feedback"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => toggleApproved.mutate({ id: f.id, approved: !f.approved })}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition ${
+                  f.approved
+                    ? "bg-gold/20 text-gold hover:bg-gold/30"
+                    : "bg-muted text-muted-foreground hover:bg-accent"
+                }`}
+              >
+                {f.approved ? "Approved" : "Approve"}
+              </button>
+              <button
+                onClick={() => remove.mutate(f.id)}
+                className="p-2 rounded-md hover:bg-destructive/10 text-destructive"
+                aria-label="Delete feedback"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       ))}
