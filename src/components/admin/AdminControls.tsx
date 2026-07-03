@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 
 import { toast } from "sonner";
 import type { Product, Livestock, RealEstate } from "@/lib/types";
 import type { LucideIcon } from "lucide-react";
 
 import { ProductForm, LivestockForm, RealEstateForm, DeleteConfirm } from "./Forms";
+
 
 type Kind = "product" | "livestock" | "real_estate";
 
