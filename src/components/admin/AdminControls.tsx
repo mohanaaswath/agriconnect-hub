@@ -40,9 +40,12 @@ const META: Record<
 };
 
 export function AddButton({ kind, label }: { kind: Kind; label?: string }) {
+  const { isAdmin } = useAuth();
   const [open, setOpen] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
+  if (!isAdmin) return null;
+
 
   const save = useMutation({
     mutationFn: async (p: Record<string, unknown>) => {
