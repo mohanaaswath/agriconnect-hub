@@ -11,12 +11,23 @@ import { AddButton } from "@/components/admin/AdminControls";
 export const Route = createFileRoute("/real-estate")({
   head: () => ({
     meta: [
-      { title: "Real Estate — Dhandapani Farms" },
+      { title: "Agricultural land & farm estates for sale in Tamil Nadu — Dhandapani Farms" },
       {
         name: "description",
-        content: "Verified agricultural land and farm estates for sale across Tamil Nadu.",
+        content:
+          "Browse verified agricultural land, farm estates and Real Estate for sale across Tamil Nadu — with soil, water and amenity details, listed by Dhandapani Farms.",
       },
+      {
+        property: "og:title",
+        content: "Agricultural land & farm estates for sale in Tamil Nadu — Dhandapani Farms",
+      },
+      {
+        property: "og:description",
+        content: "Verified agricultural properties across Tamil Nadu, ready for the next chapter.",
+      },
+      { property: "og:url", content: "https://farm-first-connect.lovable.app/real-estate" },
     ],
+    links: [{ rel: "canonical", href: "https://farm-first-connect.lovable.app/real-estate" }],
   }),
   component: RealEstatePage,
 });
