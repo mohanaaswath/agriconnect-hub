@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import {
   BadgeCheck,
   Droplets,
@@ -14,36 +13,107 @@ import type { RealEstate } from "@/lib/types";
 import { Loader } from "@/components/Loader";
 import { propertyInquiry } from "@/lib/whatsapp";
 
+const BASE_URL = "https://farm-first-connect.lovable.app";
+const REAL_ESTATE_COLUMNS =
+  "id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at";
+
 export const Route = createFileRoute("/real-estate/$code")({
+  loader: async ({ params }): Promise<RealEstate | null> => {
+    const { data, error } = await supabase
+      .from("real_estate")
+      .select(REAL_ESTATE_COLUMNS)
+      .eq("property_code", params.code)
+      .maybeSingle();
+    if (error) throw error;
+    return (data as RealEstate | null) ?? null;
+  },
+  head: ({ params, loaderData }) => {
+    const item = loaderData;
+    const url = `${BASE_URL}/real-estate/${params.code}`;
+    const title = item
+      ? `${item.name} — Dhandapani Farms`.slice(0, 60)
+      : "Property — Dhandapani Farms";
+    const rawDesc =
+      item?.description ||
+      `${item?.name ?? "Agricultural land"} in ${item?.location ?? "Tamil Nadu"} — verified listing on Dhandapani Farms.`;
+    const description = rawDesc.length < 60 ? `${rawDesc} Verified agricultural real estate in Tamil Nadu.` : rawDesc;
+    const image = item?.images?.[0];
+    const meta = [
+      { title },
+      { name: "description", content: description.slice(0, 160) },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description.slice(0, 160) },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: url },
+    ];
+    if (image) {
+      meta.push({ property: "og:image", content: image });
+      meta.push({ name: "twitter:image", content: image });
+    }
+    const scripts = item
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: item.name,
+              description: item.description ?? undefined,
+              sku: item.property_code,
+              image: image ?? undefined,
+              category: "Agricultural Land",
+              brand: { "@type": "Brand", name: "Dhandapani Farms" },
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "INR",
+                price: item.price,
+                availability: "https://schema.org/InStock",
+                url,
+              },
+            }),
+          },
+        ]
+      : undefined;
+    return { meta, links: [{ rel: "canonical", href: url }], scripts };
+  },
   component: RealEstateDetail,
+  errorComponent: RealEstateError,
+  notFoundComponent: RealEstateNotFound,
+  pendingComponent: () => <Loader />,
 });
 
+function RealEstateNotFound() {
+  return (
+    <div className="text-center py-32">
+      <p className="text-muted-foreground">Property not found.</p>
+      <Link to="/real-estate" className="mt-4 inline-block text-gold">
+        ← All properties
+      </Link>
+    </div>
+  );
+}
+
+function RealEstateError({ reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+  return (
+    <div className="text-center py-32">
+      <p className="text-muted-foreground">Couldn't load this property.</p>
+      <button
+        onClick={() => {
+          router.invalidate();
+          reset();
+        }}
+        className="mt-4 inline-block text-gold"
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+
 function RealEstateDetail() {
-  const { code } = Route.useParams();
-  const { data, isLoading } = useQuery({
-    queryKey: ["real-estate", code],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("real_estate")
-        .select(
-          "id, property_code, name, description, price, size, price_per_acre, location, water_source, soil_type, suitable_for, amenities, images, featured, verified, owner_rating, created_at",
-        )
-        .eq("property_code", code)
-        .maybeSingle();
-      if (error) throw error;
-      return data as RealEstate | null;
-    },
-  });
-  if (isLoading) return <Loader />;
-  if (!data)
-    return (
-      <div className="text-center py-32">
-        <p className="text-muted-foreground">Property not found.</p>
-        <Link to="/real-estate" className="mt-4 inline-block text-gold">
-          ← All properties
-        </Link>
-      </div>
-    );
+  const data = Route.useLoaderData();
+  if (!data) return <RealEstateNotFound />;
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
@@ -80,7 +150,7 @@ function RealEstateDetail() {
             <div className="mt-8">
               <div className="text-xs uppercase tracking-widest text-gold mb-2">Suitable for</div>
               <div className="flex flex-wrap gap-2">
-                {data.suitable_for.map((s) => (
+                {data.suitable_for.map((s: string) => (
                   <span key={s} className="px-3 py-1 rounded-full bg-accent text-sm">
                     {s}
                   </span>
@@ -92,7 +162,7 @@ function RealEstateDetail() {
             <div className="mt-6">
               <div className="text-xs uppercase tracking-widest text-gold mb-2">Amenities</div>
               <div className="flex flex-wrap gap-2">
-                {data.amenities.map((s) => (
+                {data.amenities.map((s: string) => (
                   <span key={s} className="px-3 py-1 rounded-full bg-accent text-sm">
                     {s}
                   </span>

@@ -12,12 +12,23 @@ import { AddButton } from "@/components/admin/AdminControls";
 export const Route = createFileRoute("/livestock")({
   head: () => ({
     meta: [
-      { title: "Livestock — Dhandapani Farms" },
+      { title: "Native livestock — verified sellers in Tamil Nadu — Dhandapani Farms" },
       {
         name: "description",
-        content: "Native breed cows, goats and more — verified livestock from Tamil Nadu farms.",
+        content:
+          "Buy Gir cows, Kangayam breeds, Tellicherry goats and more from verified Tamil Nadu sellers. Vaccinated, farm-raised native livestock via Dhandapani Farms.",
       },
+      {
+        property: "og:title",
+        content: "Native livestock — verified sellers in Tamil Nadu — Dhandapani Farms",
+      },
+      {
+        property: "og:description",
+        content: "Verified, vaccinated native breed cows, goats and more from Tamil Nadu farms.",
+      },
+      { property: "og:url", content: "https://farm-first-connect.lovable.app/livestock" },
     ],
+    links: [{ rel: "canonical", href: "https://farm-first-connect.lovable.app/livestock" }],
   }),
   component: LivestockPage,
 });
@@ -73,6 +84,7 @@ function LivestockPage() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search by breed, location…"
+            aria-label="Search livestock"
             className="w-full pl-10 pr-3 py-2.5 bg-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>

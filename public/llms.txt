@@ -1,0 +1,21 @@
+# Dhandapani Farms
+
+> Premium agriculture marketplace from Tamil Nadu — fresh farm produce, native livestock, and verified agricultural real estate direct from a trusted family-run farm established in 1985.
+
+Dhandapani Farms connects buyers with a family-run farm in Kangayam Taluk, Tirupur District, Tamil Nadu. The marketplace lists organic produce (grains, fruits, vegetables, seeds, spices), native livestock breeds (Gir, Kangayam cows, Tellicherry goats), and agricultural land / farm estates across Tamil Nadu.
+
+## Pages
+
+- [Home](/): Overview of the marketplace, featured produce, livestock and land.
+- [Products](/products): Fresh produce catalog — grains, fruits, vegetables, seeds, spices, trees.
+- [Livestock](/livestock): Native breed cows, goats, buffalo, sheep and poultry with verified sellers.
+- [Real Estate](/real-estate): Verified agricultural land and farm estates for sale in Tamil Nadu.
+- [Contact](/contact): Location, phone, WhatsApp and email for inquiries.
+
+## Guides
+
+- [Guide to buying agricultural land in Tamil Nadu](/blog/guide-to-buying-agricultural-land-tamil-nadu): Legal steps, Patta Chitta verification, and land conversion rules.
+
+## Optional
+
+- [Sign in](/auth): Account access for buyers.

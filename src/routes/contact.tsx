@@ -8,13 +8,20 @@ import { BUSINESS } from "@/lib/constants";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Dhandapani Farms" },
+      { title: "Contact Dhandapani Farms — Muthur, Tamil Nadu" },
       {
         name: "description",
         content:
-          "Get in touch with Dhandapani Farms for produce, livestock or real estate inquiries.",
+          "Contact Dhandapani Farms in Muthur, Tamil Nadu for produce, native livestock, or agricultural real estate inquiries. Call, WhatsApp or email.",
       },
+      { property: "og:title", content: "Contact Dhandapani Farms — Muthur, Tamil Nadu" },
+      {
+        property: "og:description",
+        content: "Reach Dhandapani Farms by phone, WhatsApp or email for marketplace inquiries.",
+      },
+      { property: "og:url", content: "https://farm-first-connect.lovable.app/contact" },
     ],
+    links: [{ rel: "canonical", href: "https://farm-first-connect.lovable.app/contact" }],
   }),
   component: ContactPage,
 });
@@ -44,7 +51,7 @@ function ContactPage() {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid md:grid-cols-2 gap-10">
       <div>
         <div className="text-xs uppercase tracking-widest text-gold">Get in touch</div>
-        <h1 className="mt-2 font-display text-4xl font-bold">Let's grow together.</h1>
+        <h1 className="mt-2 font-display text-4xl font-bold">Contact Dhandapani Farms</h1>
         <p className="mt-4 text-muted-foreground">
           Whether you're after a kilo of bananas or 50 acres of farmland, we'd love to hear from
           you.

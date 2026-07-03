@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://farm-first-connect.lovable.app/sitemap.xml

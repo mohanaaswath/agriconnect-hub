@@ -12,13 +12,23 @@ import { AddButton } from "@/components/admin/AdminControls";
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Products — Dhandapani Farms" },
+      { title: "Fresh farm produce from Tamil Nadu — Dhandapani Farms" },
       {
         name: "description",
         content:
-          "Fresh agriculture produce: grains, fruits, vegetables, seeds and trees direct from Tamil Nadu farms.",
+          "Buy fresh grains, fruits, vegetables, seeds, spices and trees direct from Tamil Nadu farms. Organic staples and seasonal harvests from Dhandapani Farms.",
       },
+      {
+        property: "og:title",
+        content: "Fresh farm produce from Tamil Nadu — Dhandapani Farms",
+      },
+      {
+        property: "og:description",
+        content: "Organic staples and seasonal harvests direct from Tamil Nadu family farms.",
+      },
+      { property: "og:url", content: "https://farm-first-connect.lovable.app/products" },
     ],
+    links: [{ rel: "canonical", href: "https://farm-first-connect.lovable.app/products" }],
   }),
   component: ProductsPage,
 });
@@ -68,6 +78,7 @@ function ProductsPage() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search produce…"
+            aria-label="Search produce"
             className="w-full pl-10 pr-3 py-2.5 bg-input rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>

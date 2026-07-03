@@ -1,41 +1,114 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { CheckCircle2, MapPin, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Livestock } from "@/lib/types";
 import { Loader } from "@/components/Loader";
 import { livestockInquiry } from "@/lib/whatsapp";
 
+const BASE_URL = "https://farm-first-connect.lovable.app";
+const LIVESTOCK_COLUMNS =
+  "id, livestock_code, name, description, price, category, breed, age, weight, milk_yield, health, vaccination, location, seller_rating, seller_verified, images, featured, created_at";
+
 export const Route = createFileRoute("/livestock/$code")({
+  loader: async ({ params }) => {
+    const { data, error } = await supabase
+      .from("livestock")
+      .select(LIVESTOCK_COLUMNS)
+      .eq("livestock_code", params.code)
+      .maybeSingle();
+    if (error) throw error;
+    return (data as Livestock | null) ?? null;
+  },
+  head: ({ params, loaderData }) => {
+    const item = loaderData;
+    const url = `${BASE_URL}/livestock/${params.code}`;
+    const title = item
+      ? `${item.name} (${item.breed ?? item.category ?? "livestock"}) — Dhandapani Farms`.slice(
+          0,
+          60,
+        )
+      : "Livestock — Dhandapani Farms";
+    const rawDesc =
+      item?.description ||
+      `${item?.name ?? "Native livestock"} from a verified Tamil Nadu farm via Dhandapani Farms.`;
+    const description = rawDesc.length < 60 ? `${rawDesc} Verified Tamil Nadu farm listing.` : rawDesc;
+    const image = item?.images?.[0];
+    const meta = [
+      { title },
+      { name: "description", content: description.slice(0, 160) },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description.slice(0, 160) },
+      { property: "og:type", content: "product" },
+      { property: "og:url", content: url },
+    ];
+    if (image) {
+      meta.push({ property: "og:image", content: image });
+      meta.push({ name: "twitter:image", content: image });
+    }
+    const scripts = item
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: item.name,
+              description: item.description ?? undefined,
+              sku: item.livestock_code,
+              image: image ?? undefined,
+              category: item.category ?? "Livestock",
+              brand: { "@type": "Brand", name: "Dhandapani Farms" },
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "INR",
+                price: item.price,
+                availability: "https://schema.org/InStock",
+                url,
+              },
+            }),
+          },
+        ]
+      : undefined;
+    return { meta, links: [{ rel: "canonical", href: url }], scripts };
+  },
   component: LivestockDetail,
+  errorComponent: LivestockError,
+  notFoundComponent: LivestockNotFound,
+  pendingComponent: () => <Loader />,
 });
 
+function LivestockNotFound() {
+  return (
+    <div className="text-center py-32">
+      <p className="text-muted-foreground">Listing not found.</p>
+      <Link to="/livestock" className="mt-4 inline-block text-gold">
+        ← All livestock
+      </Link>
+    </div>
+  );
+}
+
+function LivestockError({ reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+  return (
+    <div className="text-center py-32">
+      <p className="text-muted-foreground">Couldn't load this listing.</p>
+      <button
+        onClick={() => {
+          router.invalidate();
+          reset();
+        }}
+        className="mt-4 inline-block text-gold"
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+
 function LivestockDetail() {
-  const { code } = Route.useParams();
-  const { data, isLoading } = useQuery({
-    queryKey: ["livestock", code],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("livestock")
-        .select(
-          "id, livestock_code, name, description, price, category, breed, age, weight, milk_yield, health, vaccination, location, seller_rating, seller_verified, images, featured, created_at",
-        )
-        .eq("livestock_code", code)
-        .maybeSingle();
-      if (error) throw error;
-      return data as Livestock | null;
-    },
-  });
-  if (isLoading) return <Loader />;
-  if (!data)
-    return (
-      <div className="text-center py-32">
-        <p className="text-muted-foreground">Listing not found.</p>
-        <Link to="/livestock" className="mt-4 inline-block text-gold">
-          ← All livestock
-        </Link>
-      </div>
-    );
+  const data = Route.useLoaderData();
+  if (!data) return <LivestockNotFound />;
 
   const detailRows = [
     ["Breed", data.breed],

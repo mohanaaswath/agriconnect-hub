@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RealEstateRouteImport } from './routes/real-estate'
 import { Route as ProductsRouteImport } from './routes/products'
@@ -20,8 +21,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RealEstateCodeRouteImport } from './routes/real-estate.$code'
 import { Route as ProductsCodeRouteImport } from './routes/products.$code'
 import { Route as LivestockCodeRouteImport } from './routes/livestock.$code'
+import { Route as BlogGuideToBuyingAgriculturalLandTamilNaduRouteImport } from './routes/blog.guide-to-buying-agricultural-land-tamil-nadu'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -76,6 +83,12 @@ const LivestockCodeRoute = LivestockCodeRouteImport.update({
   path: '/$code',
   getParentRoute: () => LivestockRoute,
 } as any)
+const BlogGuideToBuyingAgriculturalLandTamilNaduRoute =
+  BlogGuideToBuyingAgriculturalLandTamilNaduRouteImport.update({
+    id: '/blog/guide-to-buying-agricultural-land-tamil-nadu',
+    path: '/blog/guide-to-buying-agricultural-land-tamil-nadu',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -90,7 +103,9 @@ export interface FileRoutesByFullPath {
   '/products': typeof ProductsRouteWithChildren
   '/real-estate': typeof RealEstateRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/blog/guide-to-buying-agricultural-land-tamil-nadu': typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
   '/real-estate/$code': typeof RealEstateCodeRoute
@@ -103,7 +118,9 @@ export interface FileRoutesByTo {
   '/products': typeof ProductsRouteWithChildren
   '/real-estate': typeof RealEstateRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/blog/guide-to-buying-agricultural-land-tamil-nadu': typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
   '/real-estate/$code': typeof RealEstateCodeRoute
@@ -118,7 +135,9 @@ export interface FileRoutesById {
   '/products': typeof ProductsRouteWithChildren
   '/real-estate': typeof RealEstateRouteWithChildren
   '/reset-password': typeof ResetPasswordRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/blog/guide-to-buying-agricultural-land-tamil-nadu': typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
   '/real-estate/$code': typeof RealEstateCodeRoute
@@ -133,7 +152,9 @@ export interface FileRouteTypes {
     | '/products'
     | '/real-estate'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/admin'
+    | '/blog/guide-to-buying-agricultural-land-tamil-nadu'
     | '/livestock/$code'
     | '/products/$code'
     | '/real-estate/$code'
@@ -146,7 +167,9 @@ export interface FileRouteTypes {
     | '/products'
     | '/real-estate'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/admin'
+    | '/blog/guide-to-buying-agricultural-land-tamil-nadu'
     | '/livestock/$code'
     | '/products/$code'
     | '/real-estate/$code'
@@ -160,7 +183,9 @@ export interface FileRouteTypes {
     | '/products'
     | '/real-estate'
     | '/reset-password'
+    | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/blog/guide-to-buying-agricultural-land-tamil-nadu'
     | '/livestock/$code'
     | '/products/$code'
     | '/real-estate/$code'
@@ -175,10 +200,19 @@ export interface RootRouteChildren {
   ProductsRoute: typeof ProductsRouteWithChildren
   RealEstateRoute: typeof RealEstateRouteWithChildren
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogGuideToBuyingAgriculturalLandTamilNaduRoute: typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -256,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LivestockCodeRouteImport
       parentRoute: typeof LivestockRoute
     }
+    '/blog/guide-to-buying-agricultural-land-tamil-nadu': {
+      id: '/blog/guide-to-buying-agricultural-land-tamil-nadu'
+      path: '/blog/guide-to-buying-agricultural-land-tamil-nadu'
+      fullPath: '/blog/guide-to-buying-agricultural-land-tamil-nadu'
+      preLoaderRoute: typeof BlogGuideToBuyingAgriculturalLandTamilNaduRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
       path: '/admin'
@@ -322,6 +363,9 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsRoute: ProductsRouteWithChildren,
   RealEstateRoute: RealEstateRouteWithChildren,
   ResetPasswordRoute: ResetPasswordRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogGuideToBuyingAgriculturalLandTamilNaduRoute:
+    BlogGuideToBuyingAgriculturalLandTamilNaduRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
