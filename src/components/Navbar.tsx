@@ -151,13 +151,13 @@ export function Navbar() {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <nav className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto p-4">
+              <nav className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-hidden p-3">
                 {NAV.map((item) => (
                   <Link
                     key={item.to}
                     to={item.to}
                     onClick={() => setOpen(false)}
-                    className="rounded-md border border-navbar-border bg-background/35 px-4 py-3 text-base font-semibold text-navbar-panel-foreground hover:bg-gold hover:text-gold-foreground"
+                    className="rounded-md border border-navbar-border bg-background/35 px-3 py-2.5 text-sm font-semibold text-navbar-panel-foreground hover:bg-gold hover:text-gold-foreground"
                   >
                     {item.label}
                   </Link>
@@ -166,7 +166,7 @@ export function Navbar() {
                   <Link
                     to="/auth"
                     onClick={() => setOpen(false)}
-                    className="mt-2 rounded-md border border-navbar-border bg-gold px-4 py-3 text-base font-bold text-gold-foreground"
+                    className="mt-1 rounded-md border border-navbar-border bg-gold px-3 py-2.5 text-sm font-bold text-gold-foreground"
                   >
                     Sign in
                   </Link>
@@ -175,12 +175,13 @@ export function Navbar() {
                   <Link
                     to="/admin"
                     onClick={() => setOpen(false)}
-                    className="mt-2 rounded-md border border-navbar-border bg-background/35 px-4 py-3 text-base font-bold text-gold"
+                    className="mt-1 rounded-md border border-navbar-border bg-background/35 px-3 py-2.5 text-sm font-bold text-gold"
                   >
                     Admin Dashboard
                   </Link>
                 )}
               </nav>
+
             </motion.div>
           </>
         )}
