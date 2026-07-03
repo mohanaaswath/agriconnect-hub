@@ -151,7 +151,7 @@ export function Navbar() {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <nav className="flex flex-col gap-2 overflow-y-auto p-4">
+              <nav className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto p-4">
                 {NAV.map((item) => (
                   <Link
                     key={item.to}
