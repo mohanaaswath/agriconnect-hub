@@ -181,7 +181,6 @@ export function Navbar() {
                   </Link>
                 )}
               </nav>
-
             </motion.div>
           </>
         )}
