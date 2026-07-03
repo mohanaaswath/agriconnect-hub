@@ -107,10 +107,13 @@ export function AdminRowControls({
   kind: Kind;
   item: Product | Livestock | RealEstate;
 }) {
+  const { isAdmin } = useAuth();
   const [editing, setEditing] = useState(false);
   const [del, setDel] = useState(false);
   const qc = useQueryClient();
   const m = META[kind];
+  if (!isAdmin) return null;
+
 
   const save = useMutation({
     mutationFn: async (p: Record<string, unknown>) => {
