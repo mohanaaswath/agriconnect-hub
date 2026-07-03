@@ -9,6 +9,7 @@ import {
   Trees,
   ClipboardList,
   MessageSquare,
+  Star,
   LayoutDashboard,
   type LucideIcon,
 } from "lucide-react";
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
 });
 
-type Tab = "dashboard" | "products" | "livestock" | "real_estate" | "orders" | "messages";
+type Tab = "dashboard" | "products" | "livestock" | "real_estate" | "orders" | "messages" | "feedback";
 
 function AdminPage() {
   const { isAdmin, loading } = useAuth();
@@ -49,6 +50,7 @@ function AdminPage() {
     { key: "real_estate", label: "Real Estate", icon: Trees },
     { key: "orders", label: "Orders", icon: ClipboardList },
     { key: "messages", label: "Messages", icon: MessageSquare },
+    { key: "feedback", label: "Feedback", icon: Star },
   ];
 
   return (
@@ -81,6 +83,7 @@ function AdminPage() {
       {tab === "real_estate" && <RealEstateAdmin />}
       {tab === "orders" && <OrdersAdmin />}
       {tab === "messages" && <MessagesAdmin />}
+      {tab === "feedback" && <FeedbackAdmin />}
     </div>
   );
 }
@@ -641,6 +644,75 @@ function MessagesAdmin() {
       ))}
       {data.length === 0 && (
         <div className="text-center py-12 text-muted-foreground">No messages yet.</div>
+      )}
+    </div>
+  );
+}
+
+// ============== FEEDBACK ==============
+function FeedbackAdmin() {
+  const qc = useQueryClient();
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["admin-feedback"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("feedback")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+  const remove = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("feedback").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      toast.success("Deleted");
+      qc.invalidateQueries({ queryKey: ["admin-feedback"] });
+    },
+  });
+  if (isLoading) return <Loader />;
+  return (
+    <div className="space-y-3">
+      {data.map((f) => (
+        <div key={f.id} className="glass rounded-xl p-4">
+          <div className="flex justify-between items-start gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="font-semibold">{f.name}</div>
+                <div className="flex">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <Star
+                      key={n}
+                      className={`w-4 h-4 ${n <= f.rating ? "fill-gold text-gold" : "text-muted-foreground"}`}
+                    />
+                  ))}
+                </div>
+                {f.email && (
+                  <span className="text-xs text-muted-foreground">· {f.email}</span>
+                )}
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground whitespace-pre-wrap">
+                {f.message}
+              </p>
+              <div className="mt-2 text-xs text-muted-foreground">
+                {new Date(f.created_at).toLocaleString()}
+              </div>
+            </div>
+            <button
+              onClick={() => remove.mutate(f.id)}
+              className="p-2 rounded-md hover:bg-destructive/10 text-destructive"
+              aria-label="Delete feedback"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      ))}
+      {data.length === 0 && (
+        <div className="text-center py-12 text-muted-foreground">No feedback yet.</div>
       )}
     </div>
   );
