@@ -36,11 +36,12 @@ function AdminPage() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("dashboard");
 
-  if (loading) return <Loader />;
-  if (!isAdmin) {
-    navigate({ to: "/products", replace: true });
-    return <Loader />;
-  }
+  useEffect(() => {
+    if (!loading && !isAdmin) navigate({ to: "/products", replace: true });
+  }, [loading, isAdmin, navigate]);
+
+  if (loading || !isAdmin) return <Loader />;
+
 
 
   const tabs: { key: Tab; label: string; icon: LucideIcon }[] = [
