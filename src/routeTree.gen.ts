@@ -21,6 +21,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as RealEstateCodeRouteImport } from './routes/real-estate.$code'
 import { Route as ProductsCodeRouteImport } from './routes/products.$code'
 import { Route as LivestockCodeRouteImport } from './routes/livestock.$code'
+import { Route as BlogGuideToBuyingAgriculturalLandTamilNaduRouteImport } from './routes/blog.guide-to-buying-agricultural-land-tamil-nadu'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -82,6 +83,12 @@ const LivestockCodeRoute = LivestockCodeRouteImport.update({
   path: '/$code',
   getParentRoute: () => LivestockRoute,
 } as any)
+const BlogGuideToBuyingAgriculturalLandTamilNaduRoute =
+  BlogGuideToBuyingAgriculturalLandTamilNaduRouteImport.update({
+    id: '/blog/guide-to-buying-agricultural-land-tamil-nadu',
+    path: '/blog/guide-to-buying-agricultural-land-tamil-nadu',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -98,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/blog/guide-to-buying-agricultural-land-tamil-nadu': typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
   '/real-estate/$code': typeof RealEstateCodeRoute
@@ -112,6 +120,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/blog/guide-to-buying-agricultural-land-tamil-nadu': typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
   '/real-estate/$code': typeof RealEstateCodeRoute
@@ -128,6 +137,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/blog/guide-to-buying-agricultural-land-tamil-nadu': typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
   '/livestock/$code': typeof LivestockCodeRoute
   '/products/$code': typeof ProductsCodeRoute
   '/real-estate/$code': typeof RealEstateCodeRoute
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admin'
+    | '/blog/guide-to-buying-agricultural-land-tamil-nadu'
     | '/livestock/$code'
     | '/products/$code'
     | '/real-estate/$code'
@@ -158,6 +169,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/admin'
+    | '/blog/guide-to-buying-agricultural-land-tamil-nadu'
     | '/livestock/$code'
     | '/products/$code'
     | '/real-estate/$code'
@@ -173,6 +185,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/sitemap.xml'
     | '/_authenticated/admin'
+    | '/blog/guide-to-buying-agricultural-land-tamil-nadu'
     | '/livestock/$code'
     | '/products/$code'
     | '/real-estate/$code'
@@ -188,6 +201,7 @@ export interface RootRouteChildren {
   RealEstateRoute: typeof RealEstateRouteWithChildren
   ResetPasswordRoute: typeof ResetPasswordRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  BlogGuideToBuyingAgriculturalLandTamilNaduRoute: typeof BlogGuideToBuyingAgriculturalLandTamilNaduRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -276,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LivestockCodeRouteImport
       parentRoute: typeof LivestockRoute
     }
+    '/blog/guide-to-buying-agricultural-land-tamil-nadu': {
+      id: '/blog/guide-to-buying-agricultural-land-tamil-nadu'
+      path: '/blog/guide-to-buying-agricultural-land-tamil-nadu'
+      fullPath: '/blog/guide-to-buying-agricultural-land-tamil-nadu'
+      preLoaderRoute: typeof BlogGuideToBuyingAgriculturalLandTamilNaduRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
       path: '/admin'
@@ -343,6 +364,8 @@ const rootRouteChildren: RootRouteChildren = {
   RealEstateRoute: RealEstateRouteWithChildren,
   ResetPasswordRoute: ResetPasswordRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  BlogGuideToBuyingAgriculturalLandTamilNaduRoute:
+    BlogGuideToBuyingAgriculturalLandTamilNaduRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
