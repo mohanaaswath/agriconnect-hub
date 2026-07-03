@@ -38,6 +38,12 @@
   --color-gold-foreground: var(--gold-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-navbar: var(--navbar);
+  --color-navbar-foreground: var(--navbar-foreground);
+  --color-navbar-muted: var(--navbar-muted);
+  --color-navbar-border: var(--navbar-border);
+  --color-navbar-panel: var(--navbar-panel);
+  --color-navbar-panel-foreground: var(--navbar-panel-foreground);
   --font-display: "Playfair Display", "Cormorant Garamond", serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
@@ -71,6 +77,14 @@
   --input: oklch(1 0 0 / 0.1);
   --ring: oklch(0.62 0.16 150);
 
+  /* High-contrast navigation surfaces */
+  --navbar: oklch(0.13 0.018 150 / 0.98);
+  --navbar-foreground: oklch(0.98 0.015 95);
+  --navbar-muted: oklch(0.86 0.05 100);
+  --navbar-border: oklch(0.78 0.14 85 / 0.28);
+  --navbar-panel: oklch(0.2 0.055 145);
+  --navbar-panel-foreground: oklch(0.99 0.012 95);
+
   /* Gradients & shadows */
   --gradient-hero:
     radial-gradient(ellipse at 20% 10%, oklch(0.35 0.1 150 / 0.5), transparent 60%),
@@ -86,6 +100,7 @@
   --shadow-glow: 0 10px 40px -10px oklch(0.62 0.16 150 / 0.4);
   --shadow-gold: 0 10px 40px -10px oklch(0.78 0.14 85 / 0.4);
   --shadow-elegant: 0 24px 60px -20px oklch(0 0 0 / 0.6);
+  --shadow-nav: 0 18px 60px -30px oklch(0 0 0 / 0.85);
 }
 
 .dark {
@@ -147,6 +162,10 @@ body,
 }
 @utility shadow-gold {
   box-shadow: var(--shadow-gold);
+}
+
+@utility shadow-nav {
+  box-shadow: var(--shadow-nav);
 }
 
 /* Custom scrollbar */
