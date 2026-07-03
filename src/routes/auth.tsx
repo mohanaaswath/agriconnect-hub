@@ -7,9 +7,21 @@ import { BUSINESS } from "@/lib/constants";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — Dhandapani Farms" },
-      { name: "description", content: "Sign in or create an account." },
+      { title: "Sign in or create an account — Dhandapani Farms" },
+      {
+        name: "description",
+        content:
+          "Sign in to your Dhandapani Farms account or create a new one to buy produce, livestock and agricultural real estate in Tamil Nadu.",
+      },
+      { property: "og:title", content: "Sign in or create an account — Dhandapani Farms" },
+      {
+        property: "og:description",
+        content: "Access your Dhandapani Farms account to shop the marketplace.",
+      },
+      { property: "og:url", content: "https://farm-first-connect.lovable.app/auth" },
+      { name: "robots", content: "noindex, follow" },
     ],
+    links: [{ rel: "canonical", href: "https://farm-first-connect.lovable.app/auth" }],
   }),
   component: AuthPage,
 });
