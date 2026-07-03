@@ -8,13 +8,20 @@ import { BUSINESS } from "@/lib/constants";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Dhandapani Farms" },
+      { title: "Contact Dhandapani Farms — Muthur, Tamil Nadu" },
       {
         name: "description",
         content:
-          "Get in touch with Dhandapani Farms for produce, livestock or real estate inquiries.",
+          "Contact Dhandapani Farms in Muthur, Tamil Nadu for produce, native livestock, or agricultural real estate inquiries. Call, WhatsApp or email.",
       },
+      { property: "og:title", content: "Contact Dhandapani Farms — Muthur, Tamil Nadu" },
+      {
+        property: "og:description",
+        content: "Reach Dhandapani Farms by phone, WhatsApp or email for marketplace inquiries.",
+      },
+      { property: "og:url", content: "https://farm-first-connect.lovable.app/contact" },
     ],
+    links: [{ rel: "canonical", href: "https://farm-first-connect.lovable.app/contact" }],
   }),
   component: ContactPage,
 });
