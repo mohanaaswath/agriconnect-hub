@@ -153,7 +153,10 @@ export function AdminRowControls({
     onError: (e) => toast.error((e as Error).message),
   });
 
+  if (!isAdmin) return null;
+
   return (
+
     <>
       <div className="flex gap-2 px-4 pb-4 -mt-2">
         <button
