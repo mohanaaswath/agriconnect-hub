@@ -1,3 +1,5 @@
+export const BASE_URL = "https://farm-first-connect.lovable.app";
+
 export const BUSINESS = {
   name: "Dhandapani Farms",
   tagline: "Premium Agriculture Marketplace",
