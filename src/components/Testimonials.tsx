@@ -21,6 +21,8 @@ export function Testimonials() {
   });
 
 
+
+
   return (
     <section className="py-20 bg-[oklch(0.14_0.012_150)] border-y border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -53,9 +55,8 @@ export function Testimonials() {
                       />
                     ))}
                   </div>
-
-
                 </div>
+
                 <p className="text-sm text-muted-foreground leading-relaxed">"{t.message}"</p>
                 <div className="mt-5">
                   <div className="font-semibold text-sm">{t.name}</div>

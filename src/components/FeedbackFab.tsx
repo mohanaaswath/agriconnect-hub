@@ -7,13 +7,7 @@ import { useAuth } from "@/hooks/use-auth";
 
 const feedbackSchema = z.object({
   name: z.string().trim().min(1, "Please enter your name").max(100),
-  email: z
-    .string()
-    .trim()
-    .max(255)
-    .email("Invalid email")
-    .optional()
-    .or(z.literal("")),
+  email: z.string().trim().max(255).email("Invalid email").optional().or(z.literal("")),
   role: z.string().trim().max(100).optional().or(z.literal("")),
   rating: z.number().int().min(1).max(5),
   message: z.string().trim().min(3, "Please write a short message").max(2000),
@@ -173,9 +167,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" | 
                     >
                       <Star
                         className={`w-6 h-6 transition ${
-                          n <= (hover || rating)
-                            ? "fill-gold text-gold"
-                            : "text-muted-foreground"
+                          n <= (hover || rating) ? "fill-gold text-gold" : "text-muted-foreground"
                         }`}
                       />
                     </button>
