@@ -55,9 +55,8 @@ export function Testimonials() {
                       />
                     ))}
                   </div>
-
-
                 </div>
+
                 <p className="text-sm text-muted-foreground leading-relaxed">"{t.message}"</p>
                 <div className="mt-5">
                   <div className="font-semibold text-sm">{t.name}</div>
