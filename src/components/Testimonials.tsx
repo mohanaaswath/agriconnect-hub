@@ -53,17 +53,8 @@ export function Testimonials() {
                       />
                     ))}
                   </div>
-                  {isAdmin ? (
-                    <button
-                      type="button"
-                      onClick={() => handleDelete(t)}
-                      disabled={deleteFeedback.isPending}
-                      aria-label={`Delete feedback from ${t.name}`}
-                      className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-destructive transition hover:bg-destructive/10 disabled:opacity-50"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  ) : null}
+
+
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">"{t.message}"</p>
                 <div className="mt-5">
