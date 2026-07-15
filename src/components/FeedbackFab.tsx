@@ -167,9 +167,7 @@ export function FeedbackFab({ variant = "fab" }: { variant?: "fab" | "footer" | 
                     >
                       <Star
                         className={`w-6 h-6 transition ${
-                          n <= (hover || rating)
-                            ? "fill-gold text-gold"
-                            : "text-muted-foreground"
+                          n <= (hover || rating) ? "fill-gold text-gold" : "text-muted-foreground"
                         }`}
                       />
                     </button>
