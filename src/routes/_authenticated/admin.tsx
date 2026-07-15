@@ -663,17 +663,8 @@ function FeedbackAdmin() {
       return data ?? [];
     },
   });
-  const remove = useMutation({
-    mutationFn: async (id: string) => {
-      const { error } = await supabase.from("feedback").delete().eq("id", id);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      toast.success("Deleted");
-      qc.invalidateQueries({ queryKey: ["admin-feedback"] });
-      qc.invalidateQueries({ queryKey: ["approved-testimonials"] });
-    },
-  });
+
+
   const toggleApproved = useMutation({
     mutationFn: async ({ id, approved }: { id: string; approved: boolean }) => {
       const { error } = await supabase.from("feedback").update({ approved }).eq("id", id);
@@ -722,13 +713,6 @@ function FeedbackAdmin() {
                 }`}
               >
                 {f.approved ? "Approved" : "Approve"}
-              </button>
-              <button
-                onClick={() => remove.mutate(f.id)}
-                className="p-2 rounded-md hover:bg-destructive/10 text-destructive"
-                aria-label="Delete feedback"
-              >
-                <Trash2 className="w-4 h-4" />
               </button>
             </div>
           </div>
