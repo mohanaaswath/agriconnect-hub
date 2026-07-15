@@ -723,13 +723,6 @@ function FeedbackAdmin() {
               >
                 {f.approved ? "Approved" : "Approve"}
               </button>
-              <button
-                onClick={() => remove.mutate(f.id)}
-                className="p-2 rounded-md hover:bg-destructive/10 text-destructive"
-                aria-label="Delete feedback"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
             </div>
           </div>
         </div>
