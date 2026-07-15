@@ -1,17 +1,13 @@
-import { Star, Trash2 } from "lucide-react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { Star } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader } from "@/components/Loader";
 import { FeedbackFab } from "@/components/FeedbackFab";
-import { useAuth } from "@/hooks/use-auth";
 import type { Database } from "@/integrations/supabase/types";
 
 type FeedbackRow = Database["public"]["Tables"]["feedback"]["Row"];
 
 export function Testimonials() {
-  const { isAdmin } = useAuth();
-  const queryClient = useQueryClient();
   const { data: items, isLoading } = useQuery({
     queryKey: ["customer-feedback"],
     queryFn: async () => {
@@ -24,23 +20,6 @@ export function Testimonials() {
     },
   });
 
-  const deleteFeedback = useMutation({
-    mutationFn: async (id: string) => {
-      const { error } = await supabase.from("feedback").delete().eq("id", id);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      toast.success("Feedback deleted");
-      queryClient.invalidateQueries({ queryKey: ["customer-feedback"] });
-    },
-    onError: () => toast.error("Only admins can delete feedback"),
-  });
-
-  const handleDelete = (feedback: FeedbackRow) => {
-    if (!isAdmin || deleteFeedback.isPending) return;
-    const ok = window.confirm(`Delete feedback from ${feedback.name}?`);
-    if (ok) deleteFeedback.mutate(feedback.id);
-  };
 
   return (
     <section className="py-20 bg-[oklch(0.14_0.012_150)] border-y border-border">
