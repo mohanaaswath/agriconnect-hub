@@ -169,7 +169,7 @@ function ProductDetail() {
               toast.success(`${data.name} added to cart`);
             }}
             disabled={data.stock === 0}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-[color:var(--dark-gold)] text-primary-foreground font-medium shadow-glow disabled:opacity-50"
           >
             <ShoppingCart className="w-4 h-4" /> Add to cart
           </button>

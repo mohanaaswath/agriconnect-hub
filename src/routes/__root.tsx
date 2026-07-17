@@ -142,11 +142,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
-      <body className="dark">
+      <body>
         {children}
         <Scripts />
       </body>
@@ -168,13 +168,13 @@ function RootComponent() {
         <BackToTop />
         <CartDrawer />
         <Toaster
-          theme="dark"
+          theme="light"
           position="top-right"
           toastOptions={{
             style: {
-              background: "oklch(0.21 0.014 150)",
-              color: "oklch(0.97 0.01 90)",
-              border: "1px solid oklch(1 0 0 / 0.1)",
+              background: "#ffffff",
+              color: "#222222",
+              border: "1px solid #E8E1D3",
             },
           }}
         />

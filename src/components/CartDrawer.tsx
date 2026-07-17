@@ -26,7 +26,7 @@ export function CartDrawer() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="fixed right-0 top-0 bottom-0 w-full sm:w-[420px] bg-[oklch(0.18_0.012_150)] z-50 flex flex-col border-l border-border"
+              className="fixed right-0 top-0 bottom-0 w-full sm:w-[420px] bg-card z-50 flex flex-col border-l border-border"
             >
               <div className="flex items-center justify-between p-5 border-b border-border">
                 <div className="flex items-center gap-2">
@@ -103,7 +103,7 @@ export function CartDrawer() {
                     </button>
                     <button
                       onClick={() => setCheckout(true)}
-                      className="flex-1 py-2.5 rounded-md bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow"
+                      className="flex-1 py-2.5 rounded-md bg-gradient-to-r from-primary to-[color:var(--dark-gold)] text-primary-foreground font-medium shadow-glow"
                     >
                       Checkout
                     </button>

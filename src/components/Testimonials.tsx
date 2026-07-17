@@ -24,7 +24,7 @@ export function Testimonials() {
 
 
   return (
-    <section className="py-20 bg-[oklch(0.14_0.012_150)] border-y border-border">
+    <section className="py-20 bg-secondary border-y border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <div className="text-xs uppercase tracking-widest text-gold">Voices from the field</div>

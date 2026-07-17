@@ -121,7 +121,7 @@ function ContactPage() {
         />
         <button
           disabled={loading}
-          className="w-full inline-flex justify-center items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow disabled:opacity-50"
+          className="w-full inline-flex justify-center items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-[color:var(--dark-gold)] text-primary-foreground font-medium shadow-glow disabled:opacity-50"
         >
           <Send className="w-4 h-4" /> {loading ? "Sending…" : "Send message"}
         </button>

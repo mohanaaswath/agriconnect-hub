@@ -4,11 +4,11 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-[oklch(0.13_0.012_150)]">
+    <footer className="border-t border-border bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid md:grid-cols-4 gap-8">
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-[oklch(0.45_0.16_150)] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary to-[color:var(--dark-gold)] flex items-center justify-center">
               <span className="text-primary-foreground font-bold font-display">D</span>
             </div>
             <span className="font-display font-bold">{BUSINESS.name}</span>

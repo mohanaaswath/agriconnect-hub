@@ -6,7 +6,7 @@ export function Statistics() {
     { value: "300+", label: "Acres handled" },
   ];
   return (
-    <section className="py-16 border-y border-border bg-[oklch(0.14_0.012_150)]">
+    <section className="py-16 border-y border-border bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
         {stats.map((s) => (
           <div key={s.label} className="text-center">
