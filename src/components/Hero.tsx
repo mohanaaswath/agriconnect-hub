@@ -54,7 +54,7 @@ export function Hero() {
         >
           <Link
             to="/products"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow hover:shadow-glow"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-[color:var(--dark-gold)] text-primary-foreground font-medium shadow-glow hover:shadow-glow"
           >
             Shop produce <ArrowRight className="w-4 h-4" />
           </Link>

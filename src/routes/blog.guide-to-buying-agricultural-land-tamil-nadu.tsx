@@ -174,7 +174,7 @@ function GuidePage() {
         </p>
         <Link
           to="/real-estate"
-          className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow"
+          className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-[color:var(--dark-gold)] text-primary-foreground font-medium shadow-glow"
         >
           Browse real estate →
         </Link>

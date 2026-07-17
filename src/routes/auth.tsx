@@ -127,7 +127,7 @@ function AuthPage() {
           )}
           <button
             disabled={loading}
-            className="w-full py-3 rounded-md bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow disabled:opacity-50"
+            className="w-full py-3 rounded-md bg-gradient-to-r from-primary to-[color:var(--dark-gold)] text-primary-foreground font-medium shadow-glow disabled:opacity-50"
           >
             {loading
               ? "Please wait…"

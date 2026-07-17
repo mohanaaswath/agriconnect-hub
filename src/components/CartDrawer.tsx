@@ -103,7 +103,7 @@ export function CartDrawer() {
                     </button>
                     <button
                       onClick={() => setCheckout(true)}
-                      className="flex-1 py-2.5 rounded-md bg-gradient-to-r from-primary to-[oklch(0.55_0.16_150)] text-primary-foreground font-medium shadow-glow"
+                      className="flex-1 py-2.5 rounded-md bg-gradient-to-r from-primary to-[color:var(--dark-gold)] text-primary-foreground font-medium shadow-glow"
                     >
                       Checkout
                     </button>
