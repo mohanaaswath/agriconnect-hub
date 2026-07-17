@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Dhandapani Farmer Business — premium dark agriculture marketplace
- * Palette: deep charcoal black, forest/emerald green, antique gold
+ * Dhandapani Farms — premium light agriculture marketplace
+ * Palette: warm ivory, antique gold, deep agriculture green, real-estate brown
  */
 
 @theme inline {
@@ -49,62 +49,64 @@
 }
 
 :root {
-  --radius: 0.75rem;
-  /* Premium dark base */
-  --background: oklch(0.16 0.012 150);
-  --foreground: oklch(0.97 0.01 90);
-  --card: oklch(0.21 0.014 150 / 0.7);
-  --card-foreground: oklch(0.97 0.01 90);
-  --popover: oklch(0.19 0.014 150);
-  --popover-foreground: oklch(0.97 0.01 90);
-  /* Emerald green primary */
-  --primary: oklch(0.62 0.16 150);
-  --primary-foreground: oklch(0.1 0.01 150);
-  --secondary: oklch(0.26 0.018 150);
-  --secondary-foreground: oklch(0.95 0.01 90);
-  --muted: oklch(0.24 0.012 150);
-  --muted-foreground: oklch(0.72 0.02 90);
-  --accent: oklch(0.3 0.04 150);
-  --accent-foreground: oklch(0.97 0.01 90);
+  --radius: 0.9rem;
+  /* Warm ivory base */
+  --background: oklch(0.975 0.012 90); /* #FAF8F2 */
+  --foreground: oklch(0.24 0 0);        /* #222222 */
+  --card: oklch(1 0 0);                 /* #FFFFFF */
+  --card-foreground: oklch(0.24 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0 0);
+  /* Antique gold primary */
+  --primary: oklch(0.64 0.13 75);       /* #B88928 */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.945 0.018 85);   /* #F4EFE5 soft cream */
+  --secondary-foreground: oklch(0.24 0 0);
+  --muted: oklch(0.945 0.018 85);
+  --muted-foreground: oklch(0.5 0.005 90); /* #6F6F6F */
+  --accent: oklch(0.93 0.03 85);
+  --accent-foreground: oklch(0.24 0 0);
   /* Antique gold */
-  --gold: oklch(0.78 0.14 85);
-  --gold-foreground: oklch(0.15 0.02 85);
-  --success: oklch(0.7 0.18 145);
-  --success-foreground: oklch(0.1 0.01 145);
-  --destructive: oklch(0.62 0.21 25);
-  --destructive-foreground: oklch(0.98 0.01 90);
-  --border: oklch(1 0 0 / 0.08);
-  --input: oklch(1 0 0 / 0.1);
-  --ring: oklch(0.62 0.16 150);
+  --gold: oklch(0.64 0.13 75);
+  --gold-foreground: oklch(1 0 0);
+  /* Agriculture deep green */
+  --success: oklch(0.5 0.12 150);       /* #1F6B3A */
+  --success-foreground: oklch(1 0 0);
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.015 85);        /* #E8E1D3 */
+  --input: oklch(0.93 0.015 85);
+  --ring: oklch(0.64 0.13 75);
 
-  /* High-contrast navigation surfaces */
-  --navbar: oklch(0.13 0.018 150 / 0.98);
-  --navbar-foreground: oklch(0.98 0.015 95);
-  --navbar-muted: oklch(0.86 0.05 100);
-  --navbar-border: oklch(0.78 0.14 85 / 0.28);
-  --navbar-panel: oklch(0.2 0.055 145);
-  --navbar-panel-foreground: oklch(0.99 0.012 95);
+  /* Extended brand tokens */
+  --agri-green: oklch(0.5 0.12 150);
+  --agri-green-deep: oklch(0.35 0.08 150); /* #123F27 */
+  --realestate-brown: oklch(0.45 0.06 55); /* #75452A */
+  --dark-gold: oklch(0.52 0.11 70);        /* #8A651B */
+  --ivory: oklch(0.975 0.012 90);
+  --cream: oklch(0.945 0.018 85);
 
-  /* Gradients & shadows */
+  /* Navigation surfaces — clean white / ivory */
+  --navbar: oklch(1 0 0 / 0.94);
+  --navbar-foreground: oklch(0.35 0.08 150); /* deep green */
+  --navbar-muted: oklch(0.4 0.03 150);
+  --navbar-border: oklch(0.9 0.015 85);
+  --navbar-panel: oklch(0.975 0.012 90);
+  --navbar-panel-foreground: oklch(0.24 0 0);
+
+  /* Gradients & shadows — subtle & premium */
   --gradient-hero:
-    radial-gradient(ellipse at 20% 10%, oklch(0.35 0.1 150 / 0.5), transparent 60%),
-    radial-gradient(ellipse at 80% 90%, oklch(0.5 0.16 85 / 0.25), transparent 60%),
-    linear-gradient(180deg, oklch(0.12 0.01 150) 0%, oklch(0.16 0.012 150) 100%);
-  --gradient-primary: linear-gradient(135deg, oklch(0.62 0.16 150), oklch(0.5 0.14 155));
-  --gradient-gold: linear-gradient(135deg, oklch(0.82 0.14 85), oklch(0.7 0.16 70));
-  --gradient-card: linear-gradient(
-    160deg,
-    oklch(0.24 0.018 150 / 0.7),
-    oklch(0.18 0.012 150 / 0.5)
-  );
-  --shadow-glow: 0 10px 40px -10px oklch(0.62 0.16 150 / 0.4);
-  --shadow-gold: 0 10px 40px -10px oklch(0.78 0.14 85 / 0.4);
-  --shadow-elegant: 0 24px 60px -20px oklch(0 0 0 / 0.6);
-  --shadow-nav: 0 18px 60px -30px oklch(0 0 0 / 0.85);
-}
-
-.dark {
-  color-scheme: dark;
+    radial-gradient(ellipse at 15% 10%, oklch(0.64 0.13 75 / 0.14), transparent 55%),
+    radial-gradient(ellipse at 85% 90%, oklch(0.5 0.12 150 / 0.1), transparent 55%),
+    linear-gradient(180deg, oklch(0.985 0.012 90) 0%, oklch(0.945 0.018 85) 100%);
+  --gradient-primary: linear-gradient(135deg, oklch(0.68 0.13 78), oklch(0.55 0.12 65));
+  --gradient-gold: linear-gradient(135deg, oklch(0.7 0.13 78), oklch(0.52 0.11 68));
+  --gradient-card: linear-gradient(160deg, oklch(1 0 0), oklch(0.98 0.01 90));
+  --shadow-glow: 0 10px 30px -14px oklch(0.64 0.13 75 / 0.35);
+  --shadow-gold: 0 12px 28px -14px oklch(0.64 0.13 75 / 0.35);
+  --shadow-elegant: 0 18px 45px -25px oklch(0.35 0.05 80 / 0.25);
+  --shadow-nav: 0 6px 24px -14px oklch(0.35 0.05 80 / 0.18);
+  --shadow-card: 0 4px 18px -10px oklch(0.35 0.05 80 / 0.15);
 }
 
 html,
@@ -119,7 +121,7 @@ body,
     border-color: var(--color-border);
   }
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     background-color: var(--color-background);
@@ -137,10 +139,10 @@ body,
 }
 
 @utility glass {
-  background: var(--gradient-card);
-  backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid oklch(1 0 0 / 0.08);
-  box-shadow: var(--shadow-elegant);
+  background: var(--card);
+  backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
 }
 
 @utility gold-text {
@@ -151,10 +153,7 @@ body,
 }
 
 @utility green-text {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--agri-green-deep);
 }
 
 @utility shadow-glow {
@@ -168,20 +167,29 @@ body,
   box-shadow: var(--shadow-nav);
 }
 
+@utility section-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dark-gold);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: oklch(0.16 0.012 150);
+  background: var(--cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.3 0.04 150);
+  background: oklch(0.85 0.03 85);
   border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.45 0.1 150);
+  background: var(--primary);
 }
 
 /* ── GATE OPENING SCENE ── */
