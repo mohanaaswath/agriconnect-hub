@@ -73,7 +73,7 @@ export function RealEstateCard({ item }: { item: RealEstate }) {
             href={propertyInquiry(item.name, item.property_code)}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[oklch(0.55_0.18_150)] text-primary-foreground text-sm font-medium hover:opacity-90"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-success text-primary-foreground text-sm font-medium hover:opacity-90"
           >
             <Phone className="w-3.5 h-3.5" /> Contact
           </a>

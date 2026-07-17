@@ -26,7 +26,7 @@ export function CartDrawer() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="fixed right-0 top-0 bottom-0 w-full sm:w-[420px] bg-[oklch(0.18_0.012_150)] z-50 flex flex-col border-l border-border"
+              className="fixed right-0 top-0 bottom-0 w-full sm:w-[420px] bg-card z-50 flex flex-col border-l border-border"
             >
               <div className="flex items-center justify-between p-5 border-b border-border">
                 <div className="flex items-center gap-2">
