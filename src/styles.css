@@ -200,7 +200,7 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #87ceeb 0%, #c8e8b0 60%, #5a8a2a 100%);
+  background: linear-gradient(180deg, #f5e9c8 0%, #ecd9a6 55%, #d9b877 100%);
   overflow: hidden;
   transition: opacity 1s ease;
 }
