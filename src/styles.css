@@ -200,7 +200,10 @@ body,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #f5e9c8 0%, #ecd9a6 55%, #d9b877 100%);
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(255, 210, 120, 0.35), transparent 60%),
+    linear-gradient(180deg, #1a0d24 0%, #3b1a3d 35%, #7a2f3a 65%, #c9822e 100%);
+
   overflow: hidden;
   transition: opacity 1s ease;
 }
@@ -266,7 +269,7 @@ body,
   left: 0;
   right: 0;
   height: 160px;
-  background: linear-gradient(180deg, #b8925a 0%, #3b2a0a 100%);
+  background: linear-gradient(180deg, #5a3a1a 0%, #1a0d05 100%);
 }
 
 .gate-wrapper {
